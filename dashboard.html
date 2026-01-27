@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"/>
-<title>لوحة التحكم</title>
+<title>لوحة الطبيب الذكية</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="assets/css/app.css"/>
 </head>
@@ -11,59 +11,34 @@
 
 <header>
   <div class="container">
-    <strong>لوحات العيادة المدرسية</strong>
+    <strong>لوحة الطبيب — AI Triage</strong>
   </div>
 </header>
 
 <main class="container">
 
 <section class="card">
-  <h2>👨‍⚕️ لوحة الطبيب</h2>
-  <p>فرز أولي، مؤشرات حيوية، قرار طبي.</p>
+  <h2>إدخال المؤشرات الحيوية</h2>
 
   <table>
-    <tr>
-      <th>الطالب</th><th>الحرارة</th><th>SpO₂</th><th>الخطورة</th><th>القرار</th>
-    </tr>
-    <tr>
-      <td>محمد</td><td>39°</td><td>91%</td>
-      <td><span class="badge high">عالية</span></td>
-      <td>إحالة فورية</td>
-    </tr>
-    <tr>
-      <td>سارة</td><td>37.8°</td><td>98%</td>
-      <td><span class="badge mid">متوسطة</span></td>
-      <td>مراقبة</td>
-    </tr>
+    <tr><td>الحرارة °C</td><td><input id="temp" type="number" value="38.5"></td></tr>
+    <tr><td>الأكسجين SpO₂</td><td><input id="spo2" type="number" value="94"></td></tr>
+    <tr><td>النبض bpm</td><td><input id="hr" type="number" value="110"></td></tr>
   </table>
+
+  <br>
+  <button class="button primary" onclick="runAI()">تشغيل AI</button>
 </section>
 
 <section class="card">
-  <h2>🏫 لوحة الإدارة</h2>
-  <p>إحصاءات تشغيلية بدون تفاصيل صحية.</p>
-
-  <table>
-    <tr><th>اليوم</th><th>عدد الحالات</th><th>العاجلة</th></tr>
-    <tr><td>الأحد</td><td>42</td><td>5</td></tr>
-    <tr><td>الاثنين</td><td>37</td><td>3</td></tr>
-  </table>
-</section>
-
-<section class="card">
-  <h2>👨‍👩‍👧 لوحة ولي الأمر</h2>
-  <p>اطمئنان كامل وتقارير مختصرة.</p>
-
-  <table>
-    <tr><th>التاريخ</th><th>السبب</th><th>النتيجة</th></tr>
-    <tr>
-      <td>2026/01/25</td>
-      <td>صداع</td>
-      <td><span class="badge low">مطمئن</span></td>
-    </tr>
-  </table>
+  <h2>نتيجة الذكاء الاصطناعي</h2>
+  <div id="aiResult">
+    <p>بانتظار الإدخال…</p>
+  </div>
 </section>
 
 </main>
 
+<script src="assets/js/ai-engine.js"></script>
 </body>
 </html>
