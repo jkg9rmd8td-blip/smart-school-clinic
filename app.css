@@ -1,0 +1,79 @@
+:root{
+  --bg:#05060a;
+  --surface:rgba(255,255,255,.06);
+  --stroke:rgba(255,255,255,.14);
+  --txt:#ffffff;
+  --muted:rgba(255,255,255,.65);
+  --accent:#2aa6ff;
+  --radius:22px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tajawal,Arial;
+  background:
+    radial-gradient(900px 500px at 80% 10%, rgba(42,166,255,.18), transparent 60%),
+    linear-gradient(180deg,#05060a,#070812);
+  color:var(--txt);
+}
+
+header{
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(16px);
+  background:rgba(5,6,10,.75);
+  border-bottom:1px solid var(--stroke);
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:32px 20px;
+}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  padding:28px;
+  box-shadow:0 40px 90px rgba(0,0,0,.6);
+  transition:.4s var(--ease);
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+h1{
+  font-size:40px;
+  margin:0 0 12px;
+}
+
+p{
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.button{
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background:var(--surface);
+  color:white;
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s var(--ease);
+}
+
+.button.primary{
+  border-color:rgba(42,166,255,.4);
+  background:linear-gradient(180deg,rgba(42,166,255,.25),rgba(255,255,255,.05));
+}
+
+.button:hover{
+  transform:translateY(-2px);
+}
