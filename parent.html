@@ -1,12 +1,28 @@
 <script src="assets/js/auth.js"></script>
+<script src="assets/js/workflow.js"></script>
 <script>guard(['parent'])</script>
 <link rel="stylesheet" href="assets/css/apple.css"/>
 
 <div class="container">
-<h1>لوحة ولي الأمر</h1>
+<h1>👨‍👩‍👧 ولي الأمر</h1>
 
-<div class="card">
-<p>الطالب: محمد</p>
-<p>آخر حالة: مطمئنة</p>
-</div>
+<div class="card" id="pBox"></div>
+
+<script>
+const c = getCase();
+if(!c || c.status !== "reviewed"){
+  pBox.innerHTML = "<p>لا توجد إشعارات حالية</p>";
+}else{
+  pBox.innerHTML = `
+    <p>الطالب: ${c.student}</p>
+    <p>قرار الطبيب: <b>${c.doctorDecision}</b></p>
+    <button class="btn" onclick="ack()">تم الاطلاع</button>
+  `;
+}
+
+function ack(){
+  updateCase({status:"notified"});
+  alert("شكرًا لتأكيدك");
+}
+</script>
 </div>
