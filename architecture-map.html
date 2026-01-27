@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Smart School Clinic — Architecture Map</title>
+
+<style>
+:root{
+  --bg:#05060a;
+  --glass:rgba(255,255,255,.06);
+  --stroke:rgba(255,255,255,.14);
+  --txt:#fff;
+  --muted:rgba(255,255,255,.65);
+  --blue:#2aa6ff;
+  --green:#38d989;
+  --yellow:#ffd166;
+  --red:#ff4d6d;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tajawal,Arial;
+  background:
+    radial-gradient(900px 500px at 80% 10%, rgba(42,166,255,.18), transparent 60%),
+    linear-gradient(180deg,#05060a,#070812);
+  color:var(--txt);
+}
+header{
+  backdrop-filter:blur(16px);
+  background:rgba(5,6,10,.75);
+  border-bottom:1px solid var(--stroke);
+}
+.nav{
+  max-width:1200px;margin:auto;
+  padding:16px 20px;
+}
+main{max-width:1200px;margin:auto;padding:36px 20px}
+.panel{
+  border:1px solid var(--stroke);
+  background:var(--glass);
+  border-radius:28px;
+  padding:28px;
+  margin-bottom:32px;
+  box-shadow:0 40px 90px rgba(0,0,0,.6);
+}
+h1{margin:0 0 10px;font-size:32px}
+h2{margin:26px 0 12px;font-size:20px}
+p{color:var(--muted);line-height:1.8}
+
+.map{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+  margin-top:20px;
+}
+.node{
+  border:1px solid var(--stroke);
+  border-radius:22px;
+  padding:20px;
+  background:rgba(255,255,255,.04);
+}
+.node b{display:block;margin-bottom:6px}
+.tag{
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:999px;
+  font-size:11px;
+  margin-bottom:10px;
+}
+.client{background:rgba(42,166,255,.25)}
+.system{background:rgba(255,255,255,.15)}
+.gov{background:rgba(56,217,137,.25)}
+.sec{background:rgba(255,209,102,.25)}
+
+.flow{
+  margin:26px 0;
+  padding:18px;
+  border-radius:20px;
+  border:1px dashed var(--stroke);
+  background:rgba(0,0,0,.25);
+}
+.flow span{
+  display:inline-block;
+  margin:6px 10px;
+  padding:6px 14px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.05);
+  font-size:12px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:16px;
+}
+th,td{
+  padding:14px;
+  border-bottom:1px solid var(--stroke);
+  font-size:13px;
+}
+
+footer{
+  text-align:center;
+  padding:24px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <h1>🗺️ الخريطة المعمارية للنظام</h1>
+    <p>تصميم تقني يوضح كيف تتكامل المدرسة مع أبشر ووزارة الصحة.</p>
+  </div>
+</header>
+
+<main>
+
+<section class="panel">
+  <h2>1️⃣ طبقة المستخدمين (Clients)</h2>
+  <div class="map">
+    <div class="node">
+      <span class="tag client">طالب</span>
+      <b>كشك العيادة المدرسية</b>
+      إدخال المؤشرات الحيوية والفحص الأولي داخل المدرسة.
+    </div>
+
+    <div class="node">
+      <span class="tag client">ولي الأمر</span>
+      <b>بوابة ولي الأمر</b>
+      الاطلاع على التقارير والموافقات عبر أبشر.
+    </div>
+
+    <div class="node">
+      <span class="tag client">طبيب / ممرض</span>
+      <b>لوحة طبية</b>
+      متابعة الحالات واتخاذ القرار الصحي.
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>2️⃣ طبقة المنصة (Core Platform)</h2>
+  <div class="map">
+    <div class="node">
+      <span class="tag system">منصة</span>
+      <b>Smart Clinic Core</b>
+      إدارة الجلسات، الصلاحيات، وسير العمل الصحي.
+    </div>
+
+    <div class="node">
+      <span class="tag system">ذكاء</span>
+      <b>Decision Engine</b>
+      فرز أولي ذكي واقتراح إجراءات (بدون تشخيص).
+    </div>
+
+    <div class="node">
+      <span class="tag sec">أمان</span>
+      <b>Security & Audit</b>
+      تشفير، سجل تدقيق، والتحكم في الوصول.
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>3️⃣ طبقة التكامل الحكومي</h2>
+  <div class="map">
+    <div class="node">
+      <span class="tag gov">أبشر / نفاذ</span>
+      <b>Identity & Consent</b>
+      التحقق من الهوية وموافقة ولي الأمر.
+    </div>
+
+    <div class="node">
+      <span class="tag gov">وزارة الصحة</span>
+      <b>Health Exchange</b>
+      السجل الصحي، الإحالات، واستمرارية الرعاية.
+    </div>
+  </div>
+
+  <div class="flow">
+    <span>طالب</span> →
+    <span>العيادة المدرسية</span> →
+    <span>موافقة أبشر</span> →
+    <span>الطبيب</span> →
+    <span>وزارة الصحة</span> →
+    <span>ولي الأمر</span>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>4️⃣ حوكمة البيانات</h2>
+  <table>
+    <tr>
+      <th>الطبقة</th>
+      <th>نوع البيانات</th>
+      <th>التحكم</th>
+    </tr>
+    <tr>
+      <td>المدرسة</td>
+      <td>بيانات تشغيلية</td>
+      <td>محدودة ومجمعة</td>
+    </tr>
+    <tr>
+      <td>المنصة</td>
+      <td>جلسات وصلاحيات</td>
+      <td>مشفرة ومراقبة</td>
+    </tr>
+    <tr>
+      <td>وزارة الصحة</td>
+      <td>بيانات صحية رسمية</td>
+      <td>ملكية صحية نظامية</td>
+    </tr>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  Smart School Clinic — Technical Architecture Map
+</footer>
+
+</body>
+</html>
