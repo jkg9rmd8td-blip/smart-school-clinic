@@ -1,15 +1,32 @@
 <script src="assets/js/auth.js"></script>
+<script src="assets/js/workflow.js"></script>
 <script>guard(['doctor'])</script>
 <link rel="stylesheet" href="assets/css/apple.css"/>
 
 <div class="container">
-<h1>لوحة الطبيب</h1>
+<h1>👨‍⚕️ لوحة الطبيب</h1>
 
-<div class="card">
-<table>
-<tr><th>الطالب</th><th>الخطورة</th><th>الإجراء</th></tr>
-<tr><td>محمد</td><td><span class="badge high">عالية</span></td><td>إحالة</td></tr>
-<tr><td>سارة</td><td><span class="badge mid">متوسطة</span></td><td>مراقبة</td></tr>
-</table>
-</div>
+<div class="card" id="caseBox"></div>
+
+<script>
+const c = getCase();
+if(!c){
+  caseBox.innerHTML = "<p>لا توجد حالات</p>";
+}else{
+  caseBox.innerHTML = `
+    <p><b>الطالب:</b> ${c.student}</p>
+    <p><b>الأعراض:</b> ${c.symptoms.join("، ")}</p>
+    <button class="btn" onclick="decide('مراقبة')">مراقبة</button>
+    <button class="btn" onclick="decide('إحالة')">إحالة</button>
+  `;
+}
+
+function decide(d){
+  updateCase({
+    doctorDecision: d,
+    status: "reviewed"
+  });
+  alert("تم تحديث الحالة وإشعار ولي الأمر");
+}
+</script>
 </div>
