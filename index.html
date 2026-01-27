@@ -2,216 +2,22 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"/>
-<title>منصة الصحة المدرسية الوطنية</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-<style>
-:root{
-  --bg:#05060a;
-  --glass:rgba(255,255,255,.06);
-  --stroke:rgba(255,255,255,.14);
-  --txt:#ffffff;
-  --muted:rgba(255,255,255,.65);
-  --blue:#2aa6ff;
-  --green:#38d989;
-  --yellow:#ffd166;
-  --red:#ff4d6d;
-  --radius:28px;
-  --ease:cubic-bezier(.2,.8,.2,1);
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tajawal,Arial;
-  color:var(--txt);
-  background:
-    radial-gradient(900px 500px at 80% 10%, rgba(42,166,255,.18), transparent 60%),
-    radial-gradient(700px 400px at 20% 20%, rgba(143,211,255,.12), transparent 55%),
-    linear-gradient(180deg,#05060a,#070812);
-}
-
-/* Top Bar */
-header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  backdrop-filter:blur(18px);
-  background:rgba(5,6,10,.7);
-  border-bottom:1px solid var(--stroke);
-}
-
-.nav{
-  max-width:1200px;
-  margin:auto;
-  padding:16px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.brand{
-  font-weight:700;
-  letter-spacing:.2px;
-}
-
-/* Hero */
-.hero{
-  max-width:1200px;
-  margin:auto;
-  padding:90px 20px 40px;
-  text-align:center;
-}
-
-.hero h1{
-  font-size:44px;
-  line-height:1.2;
-  margin:0 0 16px;
-}
-
-.hero p{
-  font-size:17px;
-  color:var(--muted);
-  line-height:1.9;
-  max-width:720px;
-  margin:0 auto 36px;
-}
-
-/* Buttons */
-.actions a{
-  display:inline-block;
-  padding:14px 26px;
-  border-radius:999px;
-  border:1px solid var(--stroke);
-  background:var(--glass);
-  color:white;
-  font-weight:600;
-  text-decoration:none;
-  margin:6px;
-  transition:.3s var(--ease);
-}
-
-.actions a.primary{
-  background:linear-gradient(180deg,rgba(42,166,255,.28),rgba(255,255,255,.06));
-  border-color:rgba(42,166,255,.45);
-}
-
-.actions a:hover{
-  transform:translateY(-3px);
-}
-
-/* Feature Cards */
-.features{
-  max-width:1200px;
-  margin:40px auto 80px;
-  padding:0 20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:var(--glass);
-  border:1px solid var(--stroke);
-  border-radius:var(--radius);
-  padding:28px;
-  box-shadow:0 40px 90px rgba(0,0,0,.6);
-  transition:.4s var(--ease);
-}
-
-.card:hover{
-  transform:translateY(-6px);
-}
-
-.card h3{
-  margin:0 0 10px;
-}
-
-.card p{
-  color:var(--muted);
-  line-height:1.8;
-  font-size:14px;
-}
-
-.badge{
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:600;
-  margin-bottom:12px;
-}
-
-.ai{background:rgba(42,166,255,.25)}
-.gov{background:rgba(56,217,137,.25)}
-.sec{background:rgba(255,209,102,.25)}
-
-footer{
-  text-align:center;
-  padding:40px 20px;
-  font-size:12px;
-  color:var(--muted);
-}
-</style>
+<title>منصة الصحة المدرسية</title>
+<link rel="stylesheet" href="assets/css/apple.css"/>
 </head>
-
 <body>
 
-<header>
-  <div class="nav">
-    <div class="brand">العيادة المدرسية الذكية</div>
-    <div>AI • أبشر • وزارة الصحة</div>
-  </div>
-</header>
-
-<section class="hero">
-  <h1>منصة الصحة المدرسية الوطنية</h1>
-  <p>
-    نظام ذكي داخل المدارس يقوم بالفرز الصحي الأولي بالذكاء الاصطناعي،
-    ويدعم الطبيب في اتخاذ القرار، مع ربط رسمي بولي الأمر
-    ووزارة الصحة عبر أبشر.
-  </p>
-
-  <div class="actions">
-    <a href="dashboard.html" class="primary">الدخول للوحة الذكية</a>
-    <a href="architecture-map.html">الخريطة المعمارية</a>
-    <a href="privacy-governance.html">الخصوصية والحوكمة</a>
-  </div>
-</section>
-
-<section class="features">
-  <div class="card">
-    <span class="badge ai">ذكاء اصطناعي</span>
-    <h3>AI Medical Triage</h3>
-    <p>
-      فرز صحي أولي يعتمد على المؤشرات الحيوية
-      ويعطي توصيات فورية للطبيب بدون تشخيص.
-    </p>
-  </div>
+<div class="container">
+  <h1>اختر دورك</h1>
 
   <div class="card">
-    <span class="badge gov">تكامل حكومي</span>
-    <h3>أبشر & وزارة الصحة</h3>
-    <p>
-      موافقة رقمية لولي الأمر، توثيق صحي،
-      وإحالات رسمية ضمن المنظومة الوطنية.
-    </p>
+    <button class="btn" onclick="setRole('doctor')">👨‍⚕️ طبيب</button>
+    <button class="btn" onclick="setRole('student')">🧑‍🎓 طالب</button>
+    <button class="btn" onclick="setRole('parent')">👨‍👩‍👧 ولي أمر</button>
+    <button class="btn" onclick="setRole('admin')">🏫 إدارة</button>
   </div>
+</div>
 
-  <div class="card">
-    <span class="badge sec">حوكمة وأمان</span>
-    <h3>Privacy by Design</h3>
-    <p>
-      أقل قدر من البيانات، صلاحيات دقيقة،
-      وتوافق مع الأنظمة الوطنية.
-    </p>
-  </div>
-</section>
-
-<footer>
-  Smart School Clinic — AI-Powered National Health Platform
-</footer>
-
+<script src="assets/js/auth.js"></script>
 </body>
 </html>
