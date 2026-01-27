@@ -2,234 +2,22 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"/>
+<title>الخصوصية والحوكمة</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Smart School Clinic — Privacy & Data Governance</title>
-
-<style>
-:root{
-  --bg:#05060a;
-  --glass:rgba(255,255,255,.06);
-  --stroke:rgba(255,255,255,.14);
-  --txt:#fff;
-  --muted:rgba(255,255,255,.65);
-  --blue:#2aa6ff;
-  --green:#38d989;
-  --yellow:#ffd166;
-  --red:#ff4d6d;
-  --ease:cubic-bezier(.2,.8,.2,1);
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tajawal,Arial;
-  background:
-    radial-gradient(900px 500px at 80% 10%, rgba(42,166,255,.18), transparent 60%),
-    linear-gradient(180deg,#05060a,#070812);
-  color:var(--txt);
-}
-header{
-  position:sticky;top:0;z-index:10;
-  backdrop-filter:blur(18px);
-  background:rgba(5,6,10,.75);
-  border-bottom:1px solid var(--stroke);
-}
-.nav{
-  max-width:1200px;margin:auto;
-  padding:14px 20px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.brand{display:flex;gap:12px;align-items:center}
-.logo{
-  width:40px;height:40px;border-radius:14px;
-  background:linear-gradient(135deg,#8fd3ff,#2aa6ff);
-}
-.brand b{font-size:14px}
-.brand span{font-size:12px;color:var(--muted)}
-
-main{max-width:1200px;margin:auto;padding:36px 20px}
-
-.panel{
-  border:1px solid var(--stroke);
-  background:var(--glass);
-  border-radius:30px;
-  padding:28px;
-  margin-bottom:32px;
-  box-shadow:0 40px 90px rgba(0,0,0,.6);
-}
-
-h1{margin:0 0 10px;font-size:32px}
-h2{margin:22px 0 12px;font-size:20px}
-h3{margin:18px 0 8px;font-size:16px}
-p,li{color:var(--muted);line-height:1.9;font-size:14px}
-
-ul{padding-right:18px}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
-  margin-top:16px;
-}
-.card{
-  border:1px solid var(--stroke);
-  border-radius:20px;
-  padding:20px;
-  background:rgba(255,255,255,.04);
-}
-.badge{
-  display:inline-block;
-  padding:4px 12px;
-  border-radius:999px;
-  font-size:11px;
-  margin-bottom:10px;
-}
-.gov{background:rgba(42,166,255,.25)}
-.sec{background:rgba(56,217,137,.25)}
-.warn{background:rgba(255,209,102,.25)}
-
-.note{
-  margin-top:18px;
-  padding:18px;
-  border-radius:18px;
-  border:1px dashed var(--stroke);
-  background:rgba(0,0,0,.25);
-  font-size:13px;
-}
-
-.table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:14px;
-}
-.table th,.table td{
-  padding:14px;
-  border-bottom:1px solid var(--stroke);
-  font-size:13px;
-}
-
-footer{
-  text-align:center;
-  padding:24px;
-  font-size:12px;
-  color:var(--muted);
-}
-</style>
+<link rel="stylesheet" href="assets/css/app.css"/>
 </head>
-
 <body>
 
-<header>
-  <div class="nav">
-    <div class="brand">
-      <div class="logo"></div>
-      <div>
-        <b>العيادة المدرسية الذكية</b><br>
-        <span>Privacy & Data Governance</span>
-      </div>
-    </div>
-  </div>
-</header>
+<header><div class="container"><strong>الخصوصية والحوكمة</strong></div></header>
 
-<main>
-
-<section class="panel">
-  <h1>🛡️ سياسة الخصوصية</h1>
+<main class="container">
+<section class="card">
   <p>
-    تلتزم منصة العيادة المدرسية الذكية بحماية بيانات الطلاب وأولياء الأمور
-    وفق أعلى معايير الخصوصية الوطنية، وبما يتوافق مع الأنظمة المعتمدة في
-    المملكة العربية السعودية.
+    لا يتم جمع أي بيانات إلا للضرورة الطبية،
+    ولا يتم أي فحص بدون موافقة ولي الأمر عبر أبشر.
   </p>
-
-  <div class="grid">
-    <div class="card">
-      <span class="badge gov">مبدأ أساسي</span>
-      <h3>تقليل البيانات</h3>
-      <p>
-        لا يتم جمع أي بيانات إلا للضرورة الطبية والتشغيلية فقط،
-        ولا تُستخدم لأي غرض تجاري أو تسويقي.
-      </p>
-    </div>
-
-    <div class="card">
-      <span class="badge sec">أمان</span>
-      <h3>التشفير والحماية</h3>
-      <p>
-        جميع البيانات محمية أثناء النقل والتخزين،
-        ولا يمكن الوصول إليها إلا عبر صلاحيات معتمدة.
-      </p>
-    </div>
-
-    <div class="card">
-      <span class="badge warn">تحكم</span>
-      <h3>موافقة ولي الأمر</h3>
-      <p>
-        لا يتم إجراء أي فحص أو مشاركة معلومات صحية
-        إلا بعد موافقة رقمية موثقة عبر أبشر/نفاذ.
-      </p>
-    </div>
-  </div>
 </section>
-
-<section class="panel">
-  <h1>🗂️ حوكمة البيانات</h1>
-  <p>
-    تحدد الحوكمة بوضوح: من يملك البيانات، من يطّلع عليها،
-    وكيف يتم استخدامها ضمن إطار نظامي.
-  </p>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>الجهة</th>
-        <th>الصلاحيات</th>
-        <th>الغرض</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>ولي الأمر</td>
-        <td>عرض التقارير الصحية</td>
-        <td>الاطمئنان والمتابعة</td>
-      </tr>
-      <tr>
-        <td>الطبيب / الممرض</td>
-        <td>إدخال وتحديث البيانات</td>
-        <td>الرعاية الصحية</td>
-      </tr>
-      <tr>
-        <td>إدارة المدرسة</td>
-        <td>إحصاءات مجمّعة فقط</td>
-        <td>اتخاذ قرارات تشغيلية</td>
-      </tr>
-      <tr>
-        <td>وزارة الصحة</td>
-        <td>السجل الصحي والإحالات</td>
-        <td>استمرارية الرعاية</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="note">
-    ⚖️ لا تملك المدرسة أو المنصة حق التصرف بالبيانات الصحية خارج نطاق
-    الرعاية والتعليم المعتمد.
-  </div>
-</section>
-
-<section class="panel">
-  <h2>🎯 لماذا هذا مهم تحكيميًا؟</h2>
-  <ul>
-    <li>يعكس فهمًا عميقًا للأنظمة الوطنية</li>
-    <li>يبني ثقة الجهات الحكومية وأولياء الأمور</li>
-    <li>يجعل المشروع قابلًا للتبني على نطاق واسع</li>
-    <li>يفصل بوضوح بين التقنية والقرار الطبي</li>
-  </ul>
-</section>
-
 </main>
-
-<footer>
-  Smart School Clinic — Privacy & Governance Model
-</footer>
 
 </body>
 </html>
