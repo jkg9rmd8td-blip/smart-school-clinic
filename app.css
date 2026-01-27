@@ -2,10 +2,13 @@
   --bg:#05060a;
   --surface:rgba(255,255,255,.06);
   --stroke:rgba(255,255,255,.14);
-  --txt:#ffffff;
+  --txt:#fff;
   --muted:rgba(255,255,255,.65);
-  --accent:#2aa6ff;
-  --radius:22px;
+  --blue:#2aa6ff;
+  --green:#38d989;
+  --yellow:#ffd166;
+  --red:#ff4d6d;
+  --radius:24px;
   --ease:cubic-bezier(.2,.8,.2,1);
 }
 
@@ -23,6 +26,7 @@ body{
 header{
   position:sticky;
   top:0;
+  z-index:10;
   backdrop-filter:blur(16px);
   background:rgba(5,6,10,.75);
   border-bottom:1px solid var(--stroke);
@@ -41,39 +45,54 @@ header{
   padding:28px;
   box-shadow:0 40px 90px rgba(0,0,0,.6);
   transition:.4s var(--ease);
+  margin-bottom:28px;
 }
 
-.card:hover{
-  transform:translateY(-6px);
-}
+.card:hover{transform:translateY(-6px)}
 
-h1{
-  font-size:40px;
-  margin:0 0 12px;
-}
-
-p{
-  color:var(--muted);
-  line-height:1.8;
-}
+h1{font-size:38px;margin:0 0 12px}
+h2{font-size:22px;margin:0 0 10px}
+p{color:var(--muted);line-height:1.8}
 
 .button{
   display:inline-block;
-  padding:12px 20px;
+  padding:12px 22px;
   border-radius:999px;
   border:1px solid var(--stroke);
   background:var(--surface);
   color:white;
   font-weight:600;
   text-decoration:none;
+  margin-left:10px;
   transition:.3s var(--ease);
 }
 
 .button.primary{
-  border-color:rgba(42,166,255,.4);
   background:linear-gradient(180deg,rgba(42,166,255,.25),rgba(255,255,255,.05));
+  border-color:rgba(42,166,255,.4);
 }
 
-.button:hover{
-  transform:translateY(-2px);
+.button:hover{transform:translateY(-2px)}
+
+.badge{
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.low{background:rgba(56,217,137,.25)}
+.mid{background:rgba(255,209,102,.25)}
+.high{background:rgba(255,77,109,.3)}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:14px;
+}
+
+th,td{
+  padding:14px;
+  border-bottom:1px solid var(--stroke);
+  font-size:13px;
 }
