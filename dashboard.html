@@ -2,199 +2,68 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"/>
+<title>لوحة التحكم</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Smart School Clinic — Dashboard</title>
-
-<style>
-:root{
-  --bg:#05060a;
-  --glass:rgba(255,255,255,.06);
-  --stroke:rgba(255,255,255,.14);
-  --txt:#fff;
-  --muted:rgba(255,255,255,.65);
-  --blue:#2aa6ff;
-  --green:#38d989;
-  --yellow:#ffd166;
-  --red:#ff4d6d;
-  --r:22px;
-  --ease:cubic-bezier(.2,.8,.2,1);
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tajawal,Arial;
-  background:
-    radial-gradient(900px 500px at 80% 10%, rgba(42,166,255,.18), transparent 60%),
-    linear-gradient(180deg,#05060a,#070812);
-  color:var(--txt);
-}
-header{
-  position:sticky;top:0;z-index:10;
-  backdrop-filter:blur(16px);
-  background:rgba(5,6,10,.75);
-  border-bottom:1px solid var(--stroke);
-}
-.nav{
-  max-width:1200px;margin:auto;
-  padding:14px 20px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.brand{display:flex;gap:12px;align-items:center}
-.logo{
-  width:40px;height:40px;border-radius:14px;
-  background:linear-gradient(135deg,#8fd3ff,#2aa6ff);
-}
-.brand b{font-size:14px}
-.brand span{font-size:12px;color:var(--muted)}
-
-select{
-  padding:10px 16px;border-radius:999px;
-  border:1px solid var(--stroke);
-  background:var(--glass);color:white;font-weight:600;
-}
-
-main{max-width:1200px;margin:auto;padding:32px 20px}
-
-.panel{
-  border:1px solid var(--stroke);
-  background:var(--glass);
-  border-radius:28px;
-  padding:26px;
-  margin-bottom:28px;
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
-  opacity:0;
-  transform:translateY(10px);
-  transition:.5s var(--ease);
-}
-.panel.show{opacity:1;transform:none}
-
-h1{margin:0 0 12px;font-size:32px}
-p{color:var(--muted);line-height:1.7}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:14px;
-  margin-top:16px;
-}
-.stat{
-  border:1px solid var(--stroke);
-  border-radius:18px;
-  padding:16px;
-  background:rgba(255,255,255,.04);
-  transition:.3s var(--ease);
-}
-.stat:hover{
-  transform:translateY(-4px);
-  border-color:rgba(143,211,255,.4);
-}
-.stat b{font-size:20px}
-.stat span{font-size:12px;color:var(--muted)}
-
-.table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:16px;
-}
-.table th,.table td{
-  padding:14px;
-  border-bottom:1px solid var(--stroke);
-  font-size:13px;
-}
-.badge{
-  padding:5px 12px;border-radius:999px;
-  font-size:11px;font-weight:600;
-}
-.low{background:rgba(56,217,137,.2)}
-.mid{background:rgba(255,209,102,.2)}
-.high{background:rgba(255,77,109,.25)}
-
-.hidden{display:none}
-
-footer{
-  text-align:center;padding:20px;
-  font-size:12px;color:var(--muted);
-}
-</style>
+<link rel="stylesheet" href="assets/css/app.css"/>
 </head>
 
 <body>
 
 <header>
-  <div class="nav">
-    <div class="brand">
-      <div class="logo"></div>
-      <div>
-        <b>العيادة المدرسية الذكية</b><br>
-        <span>Experience Focus</span>
-      </div>
-    </div>
-    <select id="role" onchange="switchRole()">
-      <option value="doctor">👨‍⚕️ الطبيب</option>
-      <option value="admin">🏫 الإدارة</option>
-      <option value="parent">👨‍👩‍👧 ولي الأمر</option>
-    </select>
+  <div class="container">
+    <strong>لوحات العيادة المدرسية</strong>
   </div>
 </header>
 
-<main>
+<main class="container">
 
-<section id="doctor" class="panel show">
-  <h1>لوحة الطبيب</h1>
-  <p>قرارات سريعة، رؤية واضحة، بدون ضجيج.</p>
+<section class="card">
+  <h2>👨‍⚕️ لوحة الطبيب</h2>
+  <p>فرز أولي، مؤشرات حيوية، قرار طبي.</p>
 
-  <div class="stats">
-    <div class="stat"><b>24</b><span>حالات اليوم</span></div>
-    <div class="stat"><b>6</b><span>عاجلة</span></div>
-    <div class="stat"><b>3</b><span>إحالات</span></div>
-  </div>
-
-  <table class="table">
-    <tr><th>الطالب</th><th>العرض</th><th>الخطورة</th><th>قرار</th></tr>
-    <tr><td>محمد</td><td>حمّى</td><td><span class="badge high">عالية</span></td><td>إحالة</td></tr>
-    <tr><td>سارة</td><td>صداع</td><td><span class="badge mid">متوسطة</span></td><td>مراقبة</td></tr>
+  <table>
+    <tr>
+      <th>الطالب</th><th>الحرارة</th><th>SpO₂</th><th>الخطورة</th><th>القرار</th>
+    </tr>
+    <tr>
+      <td>محمد</td><td>39°</td><td>91%</td>
+      <td><span class="badge high">عالية</span></td>
+      <td>إحالة فورية</td>
+    </tr>
+    <tr>
+      <td>سارة</td><td>37.8°</td><td>98%</td>
+      <td><span class="badge mid">متوسطة</span></td>
+      <td>مراقبة</td>
+    </tr>
   </table>
 </section>
 
-<section id="admin" class="panel hidden">
-  <h1>لوحة الإدارة</h1>
-  <p>نظرة تشغيلية على صحة المدرسة.</p>
+<section class="card">
+  <h2>🏫 لوحة الإدارة</h2>
+  <p>إحصاءات تشغيلية بدون تفاصيل صحية.</p>
 
-  <div class="stats">
-    <div class="stat"><b>1,248</b><span>طلاب</span></div>
-    <div class="stat"><b>312</b><span>زيارات</span></div>
-    <div class="stat"><b>99.9%</b><span>جاهزية</span></div>
-  </div>
+  <table>
+    <tr><th>اليوم</th><th>عدد الحالات</th><th>العاجلة</th></tr>
+    <tr><td>الأحد</td><td>42</td><td>5</td></tr>
+    <tr><td>الاثنين</td><td>37</td><td>3</td></tr>
+  </table>
 </section>
 
-<section id="parent" class="panel hidden">
-  <h1>لوحة ولي الأمر</h1>
-  <p>اطمئنان، بدون تفاصيل معقدة.</p>
+<section class="card">
+  <h2>👨‍👩‍👧 لوحة ولي الأمر</h2>
+  <p>اطمئنان كامل وتقارير مختصرة.</p>
 
-  <div class="stats">
-    <div class="stat"><b>سليم</b><span>الحالة</span></div>
-    <div class="stat"><b>36.8°</b><span>آخر حرارة</span></div>
-    <div class="stat"><b>اليوم</b><span>آخر زيارة</span></div>
-  </div>
+  <table>
+    <tr><th>التاريخ</th><th>السبب</th><th>النتيجة</th></tr>
+    <tr>
+      <td>2026/01/25</td>
+      <td>صداع</td>
+      <td><span class="badge low">مطمئن</span></td>
+    </tr>
+  </table>
 </section>
 
 </main>
-
-<footer>Smart School Clinic — UX Prototype</footer>
-
-<script>
-function switchRole(){
-  const role=document.getElementById("role").value;
-  ["doctor","admin","parent"].forEach(id=>{
-    const el=document.getElementById(id);
-    el.classList.add("hidden");
-    el.classList.remove("show");
-  });
-  const active=document.getElementById(role);
-  active.classList.remove("hidden");
-  setTimeout(()=>active.classList.add("show"),50);
-}
-</script>
 
 </body>
 </html>
