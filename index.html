@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>العيادة المدرسية الذكية</title>
+
+  <style>
+    :root{
+      --bg:#05060a;
+      --glass:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.14);
+      --txt:#ffffff;
+      --muted:rgba(255,255,255,.65);
+      --blue:#2aa6ff;
+      --blue2:#8fd3ff;
+      --ok:#38d989;
+      --warn:#ffd166;
+      --bad:#ff4d6d;
+      --r:18px;
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI",Tajawal,Arial;
+      color:var(--txt);
+      background:
+        radial-gradient(900px 500px at 80% 10%, rgba(42,166,255,.18), transparent 60%),
+        radial-gradient(700px 450px at 15% 20%, rgba(143,211,255,.14), transparent 55%),
+        linear-gradient(180deg,#05060a,#070812);
+    }
+    a{text-decoration:none;color:inherit}
+
+    header{
+      position:sticky;top:0;z-index:10;
+      backdrop-filter:blur(14px);
+      background:rgba(5,6,10,.7);
+      border-bottom:1px solid var(--stroke);
+    }
+    .nav{
+      max-width:1200px;
+      margin:auto;
+      padding:14px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .brand{
+      display:flex;gap:12px;align-items:center
+    }
+    .logo{
+      width:40px;height:40px;border-radius:14px;
+      background:linear-gradient(135deg,var(--blue2),var(--blue));
+      box-shadow:0 10px 30px rgba(0,0,0,.5);
+    }
+    .brand b{font-size:14px}
+    .brand span{font-size:12px;color:var(--muted)}
+
+    .btn{
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background:var(--glass);
+      font-weight:600;
+      cursor:pointer;
+      transition:.25s var(--ease);
+    }
+    .btn.primary{
+      background:linear-gradient(180deg,rgba(143,211,255,.25),rgba(255,255,255,.08));
+      border-color:rgba(143,211,255,.4);
+    }
+    .btn:hover{transform:translateY(-1px)}
+
+    main{max-width:1200px;margin:auto;padding:40px 20px}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+    }
+    @media(max-width:900px){.hero{grid-template-columns:1fr}}
+
+    .panel{
+      border:1px solid var(--stroke);
+      background:var(--glass);
+      border-radius:26px;
+      padding:28px;
+      box-shadow:0 30px 80px rgba(0,0,0,.6);
+    }
+
+    h1{
+      font-size:42px;
+      line-height:1.15;
+      margin:0 0 16px;
+    }
+    p{color:var(--muted);line-height:1.8}
+
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:20px;
+    }
+    .stat{
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:14px;
+      background:rgba(255,255,255,.04);
+    }
+    .stat b{display:block;font-size:16px}
+    .stat span{font-size:12px;color:var(--muted)}
+
+    section{margin-top:60px}
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    @media(max-width:900px){.cards{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.cards{grid-template-columns:1fr}}
+
+    .card{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
+      border-radius:20px;
+      padding:20px;
+      transition:.3s var(--ease);
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(143,211,255,.4);
+    }
+    .card h3{margin:0 0 8px;font-size:15px}
+    .card p{font-size:13px}
+
+    footer{
+      margin-top:80px;
+      padding:20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* Modal */
+    .overlay{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.6);
+      backdrop-filter:blur(10px);
+      display:none;
+      place-items:center;
+    }
+    .overlay.show{display:grid}
+    .modal{
+      width:min(600px,95%);
+      background:#0b0d17;
+      border:1px solid var(--stroke);
+      border-radius:24px;
+      padding:24px;
+    }
+    .form{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media(max-width:600px){.form{grid-template-columns:1fr}}
+    label{font-size:12px;color:var(--muted)}
+    input{
+      width:100%;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
+      color:white;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <b>العيادة المدرسية الذكية</b><br>
+        <span>Smart School Clinic</span>
+      </div>
+    </div>
+    <button class="btn primary" onclick="openModal()">تجربة فحص</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="panel">
+      <h1>تجربة صحية مدرسية<br>بفلسفة تصميم تشبه Apple</h1>
+      <p>
+        فحص سريع، توثيق ذكي، ربط حكومي، وتجربة استخدام هادئة
+        تعطي ثقة من أول نظرة.
+      </p>
+      <div class="stats">
+        <div class="stat">
+          <b>1,248</b>
+          <span>طلاب تم خدمتهم</span>
+        </div>
+        <div class="stat">
+          <b>99.9%</b>
+          <span>جاهزية النظام</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>لماذا العيادة الذكية؟</h3>
+      <p>
+        لأن الصحة المدرسية تحتاج سرعة، وضوح، وقرارات مبنية على بيانات،
+        وليس اجتهادات فردية.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>المزايا</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>فرز أولي ذكي</h3>
+        <p>تحديد مستوى الخطورة خلال ثوانٍ.</p>
+      </div>
+      <div class="card">
+        <h3>سجل صحي مدرسي</h3>
+        <p>توثيق منضبط لكل زيارة.</p>
+      </div>
+      <div class="card">
+        <h3>صلاحيات متعددة</h3>
+        <p>طالب – ولي أمر – ممرض – إدارة.</p>
+      </div>
+      <div class="card">
+        <h3>تكامل حكومي</h3>
+        <p>نفاذ / أبشر / وزارة الصحة.</p>
+      </div>
+      <div class="card">
+        <h3>تقارير فورية</h3>
+        <p>إشعار ولي الأمر مباشرة.</p>
+      </div>
+      <div class="card">
+        <h3>تصميم هادئ</h3>
+        <p>واجهة نظيفة تقلل التوتر.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  نموذج واجهة — العيادة المدرسية الذكية
+</footer>
+
+<!-- Modal -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3>فحص طالب (نموذج)</h3>
+    <div class="form">
+      <div>
+        <label>اسم الطالب</label>
+        <input>
+      </div>
+      <div>
+        <label>الحرارة</label>
+        <input>
+      </div>
+      <div>
+        <label>النبض</label>
+        <input>
+      </div>
+      <div>
+        <label>الأكسجين</label>
+        <input>
+      </div>
+    </div>
+    <br>
+    <button class="btn primary" onclick="closeModal()">حساب النتيجة</button>
+  </div>
+</div>
+
+<script>
+  const overlay=document.getElementById("overlay");
+  function openModal(){overlay.classList.add("show")}
+  function closeModal(){overlay.classList.remove("show")}
+</script>
+
+</body>
+</html>
