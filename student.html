@@ -1,12 +1,23 @@
 <script src="assets/js/auth.js"></script>
+<script src="assets/js/workflow.js"></script>
 <script>guard(['student'])</script>
 <link rel="stylesheet" href="assets/css/apple.css"/>
 
 <div class="container">
-<h1>صحتي</h1>
+<h1>🧑‍🎓 صحتي</h1>
 
 <div class="card">
-<p>آخر فحص: اليوم</p>
-<p>الحالة: <span class="badge low">مستقرة</span></p>
+  <p>هل تشعر بتعب اليوم؟</p>
+  <button class="btn" onclick="start()">إنشاء حالة صحية</button>
 </div>
+
+<script>
+function start(){
+  createCase({
+    student: "محمد",
+    symptoms: ["صداع", "إرهاق"]
+  });
+  alert("تم إرسال الحالة للطبيب");
+}
+</script>
 </div>
