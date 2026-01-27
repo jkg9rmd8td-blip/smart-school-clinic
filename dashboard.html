@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>لوحة التحكم — العيادة المدرسية الذكية</title>
+
+<style>
+:root{
+  --bg:#05060a;
+  --glass:rgba(255,255,255,.06);
+  --stroke:rgba(255,255,255,.14);
+  --txt:#fff;
+  --muted:rgba(255,255,255,.65);
+  --blue:#2aa6ff;
+  --green:#38d989;
+  --yellow:#ffd166;
+  --red:#ff4d6d;
+  --r:18px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tajawal,Arial;
+  background:
+    radial-gradient(800px 400px at 80% 10%, rgba(42,166,255,.18), transparent 60%),
+    linear-gradient(180deg,#05060a,#070812);
+  color:var(--txt);
+}
+header{
+  position:sticky;top:0;z-index:10;
+  backdrop-filter:blur(14px);
+  background:rgba(5,6,10,.7);
+  border-bottom:1px solid var(--stroke);
+}
+.nav{
+  max-width:1200px;margin:auto;
+  padding:14px 20px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{
+  width:38px;height:38px;border-radius:14px;
+  background:linear-gradient(135deg,#8fd3ff,#2aa6ff);
+}
+.brand b{font-size:14px}
+.brand span{font-size:12px;color:var(--muted)}
+
+.role-switch select{
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background:var(--glass);
+  color:white;
+  font-weight:600;
+}
+
+main{max-width:1200px;margin:auto;padding:30px 20px}
+
+.panel{
+  border:1px solid var(--stroke);
+  background:var(--glass);
+  border-radius:26px;
+  padding:24px;
+  margin-bottom:24px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+
+h1{margin:0 0 12px;font-size:32px}
+h2{margin:0 0 16px;font-size:20px}
+p{color:var(--muted);line-height:1.7}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+}
+.stat{
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  padding:14px;
+  background:rgba(255,255,255,.04);
+}
+.stat b{font-size:18px}
+.stat span{font-size:12px;color:var(--muted)}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+}
+.table th,.table td{
+  padding:12px;
+  border-bottom:1px solid var(--stroke);
+  font-size:13px;
+}
+.badge{
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:11px;
+}
+.low{background:rgba(56,217,137,.2)}
+.mid{background:rgba(255,209,102,.2)}
+.high{background:rgba(255,77,109,.2)}
+
+.hidden{display:none}
+
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <b>العيادة المدرسية الذكية</b><br>
+        <span>Dashboard</span>
+      </div>
+    </div>
+
+    <div class="role-switch">
+      <select id="role" onchange="switchRole()">
+        <option value="doctor">لوحة الطبيب</option>
+        <option value="admin">لوحة الإدارة</option>
+        <option value="parent">لوحة ولي الأمر</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- Doctor -->
+<section id="doctor" class="panel">
+  <h1>👨‍⚕️ لوحة الطبيب</h1>
+  <p>متابعة الحالات، تقييم الخطورة، واتخاذ القرار الطبي.</p>
+
+  <div class="stats">
+    <div class="stat"><b>24</b><span>حالات اليوم</span></div>
+    <div class="stat"><b>6</b><span>تنبيهات عاجلة</span></div>
+    <div class="stat"><b>3</b><span>إحالات خارجية</span></div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>الطالب</th>
+        <th>العَرَض</th>
+        <th>الخطورة</th>
+        <th>الإجراء</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>محمد</td>
+        <td>ارتفاع حرارة</td>
+        <td><span class="badge high">عالية</span></td>
+        <td>إحالة</td>
+      </tr>
+      <tr>
+        <td>سارة</td>
+        <td>صداع</td>
+        <td><span class="badge mid">متوسطة</span></td>
+        <td>متابعة</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Admin -->
+<section id="admin" class="panel hidden">
+  <h1>🏫 لوحة الإدارة</h1>
+  <p>إحصاءات المدرسة، أداء العيادة، واتخاذ قرارات تشغيلية.</p>
+
+  <div class="stats">
+    <div class="stat"><b>1,248</b><span>طلاب المدرسة</span></div>
+    <div class="stat"><b>312</b><span>زيارات صحية</span></div>
+    <div class="stat"><b>99.9%</b><span>جاهزية النظام</span></div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>اليوم</th>
+        <th>عدد الحالات</th>
+        <th>العاجلة</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>الأحد</td>
+        <td>42</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>الاثنين</td>
+        <td>37</td>
+        <td>3</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Parent -->
+<section id="parent" class="panel hidden">
+  <h1>👨‍👩‍👧 لوحة ولي الأمر</h1>
+  <p>اطمئنان كامل على صحة الابن وتقارير واضحة.</p>
+
+  <div class="stats">
+    <div class="stat"><b>سليم</b><span>الحالة العامة</span></div>
+    <div class="stat"><b>36.8°</b><span>آخر حرارة</span></div>
+    <div class="stat"><b>اليوم</b><span>آخر زيارة</span></div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>التاريخ</th>
+        <th>السبب</th>
+        <th>النتيجة</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2026/01/25</td>
+        <td>صداع</td>
+        <td><span class="badge low">مطمئن</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  نموذج واجهة — العيادة المدرسية الذكية
+</footer>
+
+<script>
+function switchRole(){
+  const role=document.getElementById("role").value;
+  ["doctor","admin","parent"].forEach(r=>{
+    document.getElementById(r).classList.add("hidden");
+  });
+  document.getElementById(role).classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
