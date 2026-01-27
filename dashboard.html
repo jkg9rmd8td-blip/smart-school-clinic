@@ -2,43 +2,194 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"/>
-<title>لوحة الطبيب الذكية</title>
+<title>لوحة الطبيب الذكية — AI Triage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="assets/css/app.css"/>
+
+<style>
+:root{
+  --bg:#05060a;
+  --glass:rgba(255,255,255,.06);
+  --stroke:rgba(255,255,255,.14);
+  --txt:#fff;
+  --muted:rgba(255,255,255,.65);
+  --blue:#2aa6ff;
+  --green:#38d989;
+  --yellow:#ffd166;
+  --red:#ff4d6d;
+  --radius:26px;
+}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tajawal,Arial;
+  background:linear-gradient(180deg,#05060a,#070812);
+  color:var(--txt);
+}
+
+header{
+  backdrop-filter:blur(16px);
+  background:rgba(5,6,10,.8);
+  border-bottom:1px solid var(--stroke);
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:32px 20px;
+}
+
+.card{
+  background:var(--glass);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  padding:28px;
+  margin-bottom:28px;
+}
+
+h1{margin:0 0 10px}
+h2{margin:0 0 14px}
+label{font-size:13px;color:var(--muted)}
+
+input,select{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.04);
+  color:white;
+}
+
+table{width:100%;border-collapse:collapse}
+td{padding:10px}
+
+button{
+  padding:14px 28px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background:rgba(42,166,255,.25);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.badge{
+  padding:6px 16px;
+  border-radius:999px;
+  font-weight:700;
+}
+
+.low{background:rgba(56,217,137,.3)}
+.mid{background:rgba(255,209,102,.3)}
+.high{background:rgba(255,77,109,.35)}
+</style>
 </head>
 
 <body>
 
 <header>
   <div class="container">
-    <strong>لوحة الطبيب — AI Triage</strong>
+    <h1>👨‍⚕️ لوحة الطبيب الذكية</h1>
+    <p style="color:#aaa;font-size:13px">
+      AI Decision Support — Not a Medical Diagnosis
+    </p>
   </div>
 </header>
 
 <main class="container">
 
 <section class="card">
-  <h2>إدخال المؤشرات الحيوية</h2>
+<h2>إدخال البيانات الصحية</h2>
 
-  <table>
-    <tr><td>الحرارة °C</td><td><input id="temp" type="number" value="38.5"></td></tr>
-    <tr><td>الأكسجين SpO₂</td><td><input id="spo2" type="number" value="94"></td></tr>
-    <tr><td>النبض bpm</td><td><input id="hr" type="number" value="110"></td></tr>
-  </table>
+<table>
+<tr><td>🌡️ الحرارة (°C)</td><td><input id="temp" value="38.5"></td></tr>
+<tr><td>🫁 الأكسجين SpO₂ (%)</td><td><input id="spo2" value="94"></td></tr>
+<tr><td>❤️ النبض (bpm)</td><td><input id="hr" value="110"></td></tr>
 
-  <br>
-  <button class="button primary" onclick="runAI()">تشغيل AI</button>
+<tr>
+<td>🩺 الأعراض</td>
+<td>
+<select id="symptoms" multiple>
+<option value="headache">صداع</option>
+<option value="cough">سعال</option>
+<option value="breath">ضيق تنفس</option>
+<option value="dizzy">دوخة</option>
+<option value="chest">ألم صدر</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>📋 تاريخ مرضي</td>
+<td>
+<select id="history">
+<option value="none">لا يوجد</option>
+<option value="asthma">ربو</option>
+<option value="diabetes">سكري</option>
+<option value="heart">أمراض قلب</option>
+</select>
+</td>
+</tr>
+</table>
+
+<br>
+<button onclick="runAI()">تشغيل التحليل الذكي</button>
 </section>
 
 <section class="card">
-  <h2>نتيجة الذكاء الاصطناعي</h2>
-  <div id="aiResult">
-    <p>بانتظار الإدخال…</p>
-  </div>
+<h2>نتيجة الذكاء الاصطناعي</h2>
+<div id="result"><p style="color:#aaa">بانتظار التحليل…</p></div>
 </section>
 
 </main>
 
-<script src="assets/js/ai-engine.js"></script>
+<script>
+function runAI(){
+  let score = 0;
+
+  const temp = parseFloat(tempInput.value);
+  const spo2 = parseInt(spo2Input.value);
+  const hr   = parseInt(hrInput.value);
+  const history = document.getElementById("history").value;
+  const symptoms = Array.from(document.getElementById("symptoms").selectedOptions).map(o=>o.value);
+
+  if(temp >= 39) score += 30;
+  else if(temp >= 38) score += 20;
+
+  if(spo2 < 92) score += 35;
+  else if(spo2 < 95) score += 20;
+
+  if(hr > 130) score += 25;
+  else if(hr > 110) score += 15;
+
+  score += symptoms.length * 5;
+
+  if(history === "asthma" || history === "heart") score += 15;
+  if(history === "diabetes") score += 10;
+
+  let level="منخفض", badge="low", advice="الحالة مستقرة، يوصى بالمراقبة داخل العيادة.";
+
+  if(score >= 70){
+    level="عالي";
+    badge="high";
+    advice="🚨 خطورة مرتفعة: يُوصى بإحالة عاجلة وإشعار ولي الأمر فورًا.";
+  }
+  else if(score >= 40){
+    level="متوسط";
+    badge="mid";
+    advice="⚠️ خطورة متوسطة: إعادة قياس المؤشرات خلال 10–15 دقيقة.";
+  }
+
+  document.getElementById("result").innerHTML = `
+    <p><b>Risk Score:</b> ${score} / 100</p>
+    <p><b>مستوى الخطورة:</b> <span class="badge ${badge}">${level}</span></p>
+    <p><b>توصية AI:</b> ${advice}</p>
+  `;
+}
+
+const tempInput = document.getElementById("temp");
+const spo2Input = document.getElementById("spo2");
+const hrInput   = document.getElementById("hr");
+</script>
+
 </body>
 </html>
