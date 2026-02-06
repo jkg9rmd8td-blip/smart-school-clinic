@@ -236,3 +236,87 @@ tbody tr:nth-child(even) {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* أعراض الطالب */
+.symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.symptom {
+  padding: 10px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.symptom input {
+  accent-color: var(--accent);
+}
+
+.symptom:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* المؤشرات الحيوية */
+.vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.vitals-grid input {
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* غرفة الزيارة الافتراضية */
+.video-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.video-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  padding: 16px;
+}
+
+.video-box {
+  background: radial-gradient(circle at top, rgba(255,255,255,0.12), rgba(0,0,0,0.9));
+  border-radius: var(--radius-lg);
+  position: relative;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.video-box.self {
+  min-height: 180px;
+}
+
+.video-label {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.video-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+}
