@@ -1,0 +1,299 @@
+/* ============================================================
+   SMART SCHOOL CLINIC — CINEMATIC DARK UI
+   Design Tokens + Components + Layout System
+============================================================ */
+
+/* ------------------------------
+   ROOT VARIABLES (Design Tokens)
+------------------------------ */
+:root {
+  --bg-main: #0d0d12;
+  --bg-card: rgba(255, 255, 255, 0.06);
+  --bg-glass: rgba(255, 255, 255, 0.08);
+  --bg-glass-heavy: rgba(255, 255, 255, 0.12);
+
+  --text-main: #ffffff;
+  --text-muted: #b3b3c2;
+
+  --accent: #7b5cff;
+  --accent2: #4f8cff;
+
+  --danger: #ff4f6d;
+  --warning: #ffb347;
+  --success: #4cd964;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shadow-soft: 0 4px 14px rgba(0,0,0,0.25);
+  --shadow-hard: 0 8px 24px rgba(0,0,0,0.45);
+
+  --transition: 0.25s ease;
+}
+
+/* ------------------------------
+   GLOBAL RESET
+------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Tajawal", sans-serif;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ------------------------------
+   SCROLLBAR
+------------------------------ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-glass-heavy);
+  border-radius: 999px;
+}
+
+/* ------------------------------
+   GLASS COMPONENT
+------------------------------ */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ------------------------------
+   CARD
+------------------------------ */
+.card {
+  padding: 20px;
+  border-radius: var(--radius-lg);
+}
+
+/* ------------------------------
+   BUTTONS
+------------------------------ */
+.primary-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.primary-btn:hover {
+  opacity: 0.85;
+}
+
+.icon-btn {
+  background: var(--bg-glass);
+  border: none;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  background: var(--bg-glass-heavy);
+}
+
+.icon-btn.danger {
+  color: var(--danger);
+}
+
+/* ------------------------------
+   BADGES
+------------------------------ */
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-critical {
+  background: rgba(255, 79, 109, 0.2);
+  color: var(--danger);
+}
+
+.badge-warning {
+  background: rgba(255, 179, 71, 0.2);
+  color: var(--warning);
+}
+
+.badge-normal {
+  background: rgba(123, 92, 255, 0.2);
+  color: var(--accent);
+}
+
+/* ------------------------------
+   TABLES
+------------------------------ */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead {
+  background: rgba(255,255,255,0.08);
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+tbody tr {
+  transition: var(--transition);
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* ------------------------------
+   APP HEADER
+------------------------------ */
+.app-header {
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ------------------------------
+   BRAND MARK
+------------------------------ */
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* ------------------------------
+   SYMPTOMS GRID
+------------------------------ */
+.symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.symptom {
+  padding: 10px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.symptom input {
+  accent-color: var(--accent);
+}
+
+.symptom:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ------------------------------
+   VITALS GRID
+------------------------------ */
+.vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.vitals-grid input {
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* ------------------------------
+   VIDEO CALL LAYOUT
+------------------------------ */
+.video-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.video-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  padding: 16px;
+}
+
+.video-box {
+  background: radial-gradient(circle at top, rgba(255,255,255,0.12), rgba(0,0,0,0.9));
+  border-radius: var(--radius-lg);
+  position: relative;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.video-box.self {
+  min-height: 180px;
+}
+
+.video-label {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.video-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+}
+
+/* ------------------------------
+   FADE ANIMATION
+------------------------------ */
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
