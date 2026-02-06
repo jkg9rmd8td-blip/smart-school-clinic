@@ -3,160 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>لوحة التمريض – العيادة المدرسية الذكية</title>
 
-  <!-- أيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-
-  <!-- الثيم العام -->
-  <link rel="stylesheet" href="assets/css/global.css" />
-
-  <!-- ستايل لوحة التمريض -->
-  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body>
-  <div class="app-shell fade-in">
+<body data-page="nurse-dashboard">
+  <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:16px;">
 
-    <!-- الهيدر -->
-    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:20px;">
-      <div class="brand" style="display:flex;align-items:center;gap:14px;">
-        <div class="brand-mark" style="
-          width:48px;height:48px;border-radius:14px;
-          background:linear-gradient(135deg,#7b5cff,#a08cff);
-          display:flex;align-items:center;justify-content:center;
-          font-weight:700;font-size:1.1rem;">
-          SC
-        </div>
-        <div class="brand-text">
-          <div class="brand-title" style="font-size:1.1rem;font-weight:600;">لوحة التمريض</div>
-          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
-            إدارة الحالات اليومية – العيادة المدرسية الذكية
+    <header class="app-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-mark">NR</div>
+        <div>
+          <div style="font-weight:600;">لوحة التمريض</div>
+          <div class="text-soft" style="font-size:0.8rem;">
+            إدارة الحالات اليومية، التنبيهات، ومسار الطوارئ
           </div>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button id="theme-toggle" class="icon-btn">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="icon-btn" id="theme-toggle">
           <span class="material-symbols-rounded">brightness_6</span>
         </button>
-
         <button class="icon-btn danger" onclick="home()">
           <span class="material-symbols-rounded">logout</span>
         </button>
       </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="app-main" style="display:flex;flex-direction:column;gap:18px;">
+    <main style="flex:1;display:grid;grid-template-columns:2fr 1.2fr;gap:14px;">
 
-      <!-- الصف العلوي: البطاقات -->
-      <section class="status-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
-        <div class="status-card glass">
-          <div class="status-label">الحالات الحالية</div>
-          <div class="status-value" id="active-count">0</div>
-          <div class="status-meta">طلاب تحت المتابعة الآن</div>
+      <section class="glass card" style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <h2 style="font-size:1rem;">حالات اليوم</h2>
+          <span class="badge badge-normal">اليوم</span>
         </div>
 
-        <div class="status-card glass critical">
-          <div class="status-label">الحالات الحرجة</div>
-          <div class="status-value" id="critical-count">0</div>
-          <div class="status-meta">تحتاج تدخل فوري</div>
-        </div>
-
-        <div class="status-card glass pending">
-          <div class="status-label">الحالات المنتظرة</div>
-          <div class="status-value" id="pending-count">0</div>
-          <div class="status-meta">بانتظار الفحص</div>
-        </div>
-
-        <div class="status-card glass completed">
-          <div class="status-label">الحالات المكتملة</div>
-          <div class="status-value" id="completed-count">0</div>
-          <div class="status-meta">تم إنهاؤها اليوم</div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>الطالب</th>
+                <th>الصف</th>
+                <th>الخطورة</th>
+                <th>الوقت</th>
+              </tr>
+            </thead>
+            <tbody id="cases-body">
+              <!-- من JS -->
+            </tbody>
+          </table>
         </div>
       </section>
 
-      <!-- الصف الأوسط: جدول + تنبيهات -->
-      <section class="middle-row" style="display:grid;grid-template-columns:3fr 1.2fr;gap:16px;">
+      <section style="display:flex;flex-direction:column;gap:10px;">
 
-        <!-- جدول الحالات -->
-        <section class="cases-panel glass" style="padding:18px;">
-          <div class="panel-header" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
-            <div>
-              <h2>الحالات اليوم</h2>
-              <p>تحديث لحظي لمحاكاة بيانات إنترنت الأشياء والذكاء الاصطناعي</p>
-            </div>
-
-            <button class="primary-btn" onclick="go('case-details.html')">
-              + إضافة فحص جديد
-            </button>
+        <div class="glass card">
+          <h2 style="font-size:1rem;margin-bottom:6px;">التنبيهات</h2>
+          <div id="alerts-list" style="display:flex;flex-direction:column;gap:6px;">
+            <!-- من JS -->
           </div>
+        </div>
 
-          <div class="table-wrapper">
-            <table class="cases-table">
-              <thead>
-                <tr>
-                  <th>اسم الطالب</th>
-                  <th>العمر</th>
-                  <th>مستوى الخطورة</th>
-                  <th>وقت الفحص</th>
-                  <th>الإجراء</th>
-                </tr>
-              </thead>
-              <tbody id="cases-body">
-                <!-- يتم تعبئتها من JS -->
-              </tbody>
-            </table>
-          </div>
-        </section>
+        <div class="glass card">
+          <h2 style="font-size:1rem;margin-bottom:6px;">مسار الطوارئ</h2>
+          <p class="text-soft" style="font-size:0.85rem;">
+            تفعيل بروتوكول الطوارئ المدرسي للحالات الحرجة.
+          </p>
+          <button class="primary-btn" style="margin-top:8px;" onclick="go('emergency-flow.html')">
+            فتح مسار الطوارئ
+          </button>
+        </div>
 
-        <!-- لوحة التنبيهات -->
-        <aside class="alerts-panel glass" style="padding:18px;">
-          <div class="panel-header">
-            <h2>التنبيهات الذكية</h2>
-            <p>تحليل تنبّئي للمؤشرات الحيوية</p>
-          </div>
-
-          <div id="alerts-list" class="alerts-list" style="max-height:320px;overflow-y:auto;">
-            <!-- JS -->
-          </div>
-        </aside>
-
-      </section>
-
-      <!-- الصف السفلي: إجراءات سريعة -->
-      <section class="quick-actions glass" style="display:flex;gap:10px;padding:12px;">
-        <button class="quick-btn" onclick="go('student-profile.html')">
-          <span class="material-symbols-rounded">person_search</span>
-          <span>فتح ملف طالب</span>
-        </button>
-
-        <button class="quick-btn danger" onclick="go('emergency-flow.html')">
-          <span class="material-symbols-rounded">emergency</span>
-          <span>تفعيل مسار الطوارئ</span>
-        </button>
-
-        <button class="quick-btn" onclick="go('case-details.html')">
-          <span class="material-symbols-rounded">add_notes</span>
-          <span>إضافة حالة</span>
-        </button>
-
-        <button class="quick-btn" onclick="go('doctor.html')">
-          <span class="material-symbols-rounded">monitor_heart</span>
-          <span>لوحة الطبيب</span>
-        </button>
       </section>
 
     </main>
 
   </div>
 
-  <!-- ملفات JS -->
   <script src="assets/js/theme.js"></script>
-  <script src="assets/js/router.js"></script>
-  <script src="assets/js/dashboard.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
