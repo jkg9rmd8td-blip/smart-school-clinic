@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>زيارة افتراضية – العيادة المدرسية الذكية</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body data-page="video-call">
+  <div class="app-shell fade-in">
+
+    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
+      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+        <div class="brand-mark" style="
+          width:48px;height:48px;border-radius:14px;
+          background:linear-gradient(135deg,#7b5cff,#a08cff);
+          display:flex;align-items:center;justify-content:center;
+          font-weight:700;font-size:1.1rem;">
+          VC
+        </div>
+        <div class="brand-text">
+          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">زيارة افتراضية</div>
+          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
+            تواصل مباشر بين الطالب والطبيب
+          </div>
+        </div>
+      </div>
+
+      <button id="theme-toggle" class="icon-btn">
+        <span class="material-symbols-rounded">brightness_6</span>
+      </button>
+    </header>
+
+    <main class="video-layout">
+
+      <section class="glass video-main">
+        <div class="video-box">
+          <span class="video-label">الطبيب</span>
+        </div>
+        <div class="video-box self">
+          <span class="video-label">الطالب</span>
+        </div>
+      </section>
+
+      <section class="glass video-controls">
+        <button class="icon-btn" onclick="videoCall.toggleMic()">
+          <span class="material-symbols-rounded">mic</span>
+        </button>
+        <button class="icon-btn" onclick="videoCall.toggleCam()">
+          <span class="material-symbols-rounded">videocam</span>
+        </button>
+        <button class="icon-btn danger" onclick="videoCall.endCall()">
+          <span class="material-symbols-rounded">call_end</span>
+        </button>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
