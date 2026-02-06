@@ -3,23 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تقرير الطالب – العيادة المدرسية الذكية</title>
 
-  <title>ملف الطالب – العيادة المدرسية الذكية</title>
-
-  <!-- أيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-
-  <!-- الثيم العام -->
-  <link rel="stylesheet" href="assets/css/global.css" />
-
-  <!-- ستايل ملف الطالب -->
-  <link rel="stylesheet" href="assets/css/student.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body>
+<body data-page="student-self">
   <div class="app-shell fade-in">
 
-    <!-- الهيدر -->
     <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
       <div class="brand" style="display:flex;align-items:center;gap:14px;">
         <div class="brand-mark" style="
@@ -27,116 +19,104 @@
           background:linear-gradient(135deg,#7b5cff,#a08cff);
           display:flex;align-items:center;justify-content:center;
           font-weight:700;font-size:1.1rem;">
-          SC
+          ST
         </div>
         <div class="brand-text">
-          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">ملف الطالب</div>
+          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">تقرير الطالب</div>
           <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
-            بيانات الطالب – العيادة المدرسية الذكية
+            إدخال الأعراض والمؤشرات الحيوية
           </div>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button id="theme-toggle" class="icon-btn">
-          <span class="material-symbols-rounded">brightness_6</span>
-        </button>
-
-        <button class="icon-btn danger" onclick="home()">
-          <span class="material-symbols-rounded">logout</span>
-        </button>
-      </div>
+      <button id="theme-toggle" class="icon-btn">
+        <span class="material-symbols-rounded">brightness_6</span>
+      </button>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="fade-in" style="display:flex;flex-direction:column;gap:20px;">
+    <main style="display:flex;flex-direction:column;gap:20px;">
 
-      <!-- بيانات الطالب -->
+      <!-- الأعراض -->
       <section class="glass card" style="padding:20px;">
-        <h2>بيانات الطالب</h2>
+        <h2>الأعراض</h2>
+        <p>اختر الأعراض التي تشعر بها:</p>
 
-        <p>الاسم: <strong>محمد عبدالعزيز الربيعي</strong></p>
-        <p>العمر: <strong>10 سنوات</strong></p>
-        <p>الصف: <strong>الخامس الابتدائي</strong></p>
-        <p>الحالة الصحية الحالية: <span class="badge badge-normal">مستقرة</span></p>
+        <div class="symptom-grid">
+          <label class="glass symptom">
+            <input type="checkbox" value="صداع">
+            صداع
+          </label>
+
+          <label class="glass symptom">
+            <input type="checkbox" value="حرارة">
+            حرارة
+          </label>
+
+          <label class="glass symptom">
+            <input type="checkbox" value="كحة">
+            كحة
+          </label>
+
+          <label class="glass symptom">
+            <input type="checkbox" value="ألم بطن">
+            ألم بطن
+          </label>
+
+          <label class="glass symptom">
+            <input type="checkbox" value="دوخة">
+            دوخة
+          </label>
+
+          <label class="glass symptom">
+            <input type="checkbox" value="غثيان">
+            غثيان
+          </label>
+
+          <label class="glass symptom">
+            <input type="checkbox" value="ضيق تنفس">
+            ضيق تنفس
+          </label>
+        </div>
       </section>
 
       <!-- المؤشرات الحيوية -->
       <section class="glass card" style="padding:20px;">
         <h2>المؤشرات الحيوية</h2>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px;">
-          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
-            <h3>الحرارة</h3>
-            <p style="font-size:1.4rem;">37.4°C</p>
-          </div>
-
-          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
-            <h3>النبض</h3>
-            <p style="font-size:1.4rem;">88 bpm</p>
-          </div>
-
-          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
-            <h3>الأكسجين</h3>
-            <p style="font-size:1.4rem;">97%</p>
-          </div>
-
-          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
-            <h3>الضغط</h3>
-            <p style="font-size:1.4rem;">108 / 72</p>
-          </div>
+        <div class="vitals-grid">
+          <input class="glass" id="temp" type="number" placeholder="الحرارة (°C)">
+          <input class="glass" id="pulse" type="number" placeholder="النبض (bpm)">
+          <input class="glass" id="oxygen" type="number" placeholder="الأكسجين (%)">
+          <input class="glass" id="bp" type="text" placeholder="الضغط (مثال: 110/70)">
         </div>
       </section>
 
-      <!-- السجل الطبي -->
+      <!-- تحليل AI -->
       <section class="glass card" style="padding:20px;">
-        <h2>السجل الطبي</h2>
+        <h2>تحليل الذكاء الاصطناعي</h2>
+        <p>بعد إدخال الأعراض، اضغط على زر التحليل:</p>
 
-        <div class="table-wrapper" style="margin-top:10px;">
-          <table>
-            <thead>
-              <tr>
-                <th>التاريخ</th>
-                <th>السبب</th>
-                <th>الإجراء</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2025-12-10</td>
-                <td>ارتفاع حرارة</td>
-                <td>فحص + خافض حرارة</td>
-              </tr>
+        <button class="primary-btn" style="margin-top:12px;" onclick="studentSelfReport.analyzeSymptoms()">
+          تحليل الحالة
+        </button>
 
-              <tr>
-                <td>2025-11-02</td>
-                <td>صداع</td>
-                <td>راحة + ماء</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div id="ai-result" style="margin-top:16px;font-size:1rem;color:var(--text-main);"></div>
       </section>
 
-      <!-- إجراءات سريعة -->
+      <!-- زيارة افتراضية -->
       <section class="glass card" style="padding:20px;">
-        <h2>إجراءات سريعة</h2>
+        <h2>زيارة افتراضية</h2>
+        <p>إذا كنت تحتاج التواصل مع الطبيب مباشرة:</p>
 
-        <div style="display:flex;gap:10px;margin-top:12px;">
-          <button class="primary-btn" onclick="go('case-details.html')">فتح حالة</button>
-          <button class="primary-btn" onclick="go('nurse-dashboard.html')">لوحة التمريض</button>
-          <button class="primary-btn" onclick="go('doctor.html')">لوحة الطبيب</button>
-        </div>
+        <button class="primary-btn" style="margin-top:12px;" onclick="studentSelfReport.startVirtualVisit()">
+          بدء زيارة صوت وصورة
+        </button>
       </section>
 
     </main>
 
   </div>
 
-  <!-- ملفات JS -->
-  <script src="assets/js/theme.js"></script>
-  <script src="assets/js/router.js"></script>
-  <script src="assets/js/student.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
