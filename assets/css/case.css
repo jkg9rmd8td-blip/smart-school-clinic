@@ -1,0 +1,11 @@
+/* ================================
+   CASE DETAILS CINEMATIC STYLE
+   ================================ */
+
+textarea {
+  resize: none;
+}
+
+textarea:focus {
+  outline: 2px solid var(--accent);
+}
