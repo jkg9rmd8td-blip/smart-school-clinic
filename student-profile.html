@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ملف الطالب – العيادة المدرسية الذكية</title>
+
+  <!-- أيقونات -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+  <!-- الثيم العام -->
+  <link rel="stylesheet" href="assets/css/global.css" />
+
+  <!-- ستايل ملف الطالب -->
+  <link rel="stylesheet" href="assets/css/student.css" />
+</head>
+
+<body>
+  <div class="app-shell fade-in">
+
+    <!-- الهيدر -->
+    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
+      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+        <div class="brand-mark" style="
+          width:48px;height:48px;border-radius:14px;
+          background:linear-gradient(135deg,#7b5cff,#a08cff);
+          display:flex;align-items:center;justify-content:center;
+          font-weight:700;font-size:1.1rem;">
+          SC
+        </div>
+        <div class="brand-text">
+          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">ملف الطالب</div>
+          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
+            بيانات الطالب – العيادة المدرسية الذكية
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button id="theme-toggle" class="icon-btn">
+          <span class="material-symbols-rounded">brightness_6</span>
+        </button>
+
+        <button class="icon-btn danger" onclick="home()">
+          <span class="material-symbols-rounded">logout</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="fade-in" style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- بيانات الطالب -->
+      <section class="glass card" style="padding:20px;">
+        <h2>بيانات الطالب</h2>
+
+        <p>الاسم: <strong>محمد عبدالعزيز الربيعي</strong></p>
+        <p>العمر: <strong>10 سنوات</strong></p>
+        <p>الصف: <strong>الخامس الابتدائي</strong></p>
+        <p>الحالة الصحية الحالية: <span class="badge badge-normal">مستقرة</span></p>
+      </section>
+
+      <!-- المؤشرات الحيوية -->
+      <section class="glass card" style="padding:20px;">
+        <h2>المؤشرات الحيوية</h2>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px;">
+          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
+            <h3>الحرارة</h3>
+            <p style="font-size:1.4rem;">37.4°C</p>
+          </div>
+
+          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
+            <h3>النبض</h3>
+            <p style="font-size:1.4rem;">88 bpm</p>
+          </div>
+
+          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
+            <h3>الأكسجين</h3>
+            <p style="font-size:1.4rem;">97%</p>
+          </div>
+
+          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
+            <h3>الضغط</h3>
+            <p style="font-size:1.4rem;">108 / 72</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- السجل الطبي -->
+      <section class="glass card" style="padding:20px;">
+        <h2>السجل الطبي</h2>
+
+        <div class="table-wrapper" style="margin-top:10px;">
+          <table>
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>السبب</th>
+                <th>الإجراء</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025-12-10</td>
+                <td>ارتفاع حرارة</td>
+                <td>فحص + خافض حرارة</td>
+              </tr>
+
+              <tr>
+                <td>2025-11-02</td>
+                <td>صداع</td>
+                <td>راحة + ماء</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- إجراءات سريعة -->
+      <section class="glass card" style="padding:20px;">
+        <h2>إجراءات سريعة</h2>
+
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="primary-btn" onclick="go('case-details.html')">فتح حالة</button>
+          <button class="primary-btn" onclick="go('nurse-dashboard.html')">لوحة التمريض</button>
+          <button class="primary-btn" onclick="go('doctor.html')">لوحة الطبيب</button>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ملفات JS -->
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/student.js"></script>
+
+</body>
+</html>
