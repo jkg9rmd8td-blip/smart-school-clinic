@@ -1,23 +1,84 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-<meta charset="utf-8"/>
-<title>منصة الصحة المدرسية</title>
-<link rel="stylesheet" href="assets/css/apple.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>العيادة المدرسية الذكية – Smart School Clinic</title>
+
+  <!-- أيقونات -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+  <!-- الثيم العام -->
+  <link rel="stylesheet" href="assets/css/global.css" />
 </head>
+
 <body>
+  <div class="app-shell fade-in">
 
-<div class="container">
-  <h1>اختر دورك</h1>
+    <!-- الهيدر -->
+    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
+      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+        <div class="brand-mark" style="
+          width:48px;height:48px;border-radius:14px;
+          background:linear-gradient(135deg,#7b5cff,#a08cff);
+          display:flex;align-items:center;justify-content:center;
+          font-weight:700;font-size:1.1rem;">
+          SC
+        </div>
+        <div class="brand-text">
+          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">العيادة المدرسية الذكية</div>
+          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
+            منصة صحية وقائية متكاملة في البيئة التعليمية
+          </div>
+        </div>
+      </div>
 
-  <div class="card">
-    <button class="btn" onclick="setRole('doctor')">👨‍⚕️ طبيب</button>
-    <button class="btn" onclick="setRole('student')">🧑‍🎓 طالب</button>
-    <button class="btn" onclick="setRole('parent')">👨‍👩‍👧 ولي أمر</button>
-    <button class="btn" onclick="setRole('admin')">🏫 إدارة</button>
+      <button id="theme-toggle" class="icon-btn">
+        <span class="material-symbols-rounded">brightness_6</span>
+      </button>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="fade-in" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+
+      <!-- بطاقة ولي الأمر -->
+      <div class="glass card" onclick="go('parent.html')" style="cursor:pointer;">
+        <h2>ولي الأمر</h2>
+        <p>متابعة حالة الطالب الصحية، التنبيهات، السجل الطبي، وطلبات الخروج.</p>
+      </div>
+
+      <!-- بطاقة التمريض -->
+      <div class="glass card" onclick="go('nurse-dashboard.html')" style="cursor:pointer;">
+        <h2>لوحة التمريض</h2>
+        <p>إدارة الحالات اليومية، التنبيهات الذكية، ومسار الطوارئ.</p>
+      </div>
+
+      <!-- بطاقة الطبيب -->
+      <div class="glass card" onclick="go('doctor.html')" style="cursor:pointer;">
+        <h2>لوحة الطبيب</h2>
+        <p>تشخيص الحالات، مراجعة المؤشرات الحيوية، والتوصيات الطبية.</p>
+      </div>
+
+      <!-- بطاقة المدير -->
+      <div class="glass card" onclick="go('admin.html')" style="cursor:pointer;">
+        <h2>لوحة المدير</h2>
+        <p>إحصائيات، تقارير، إدارة المستخدمين، وإدارة النظام.</p>
+      </div>
+
+      <!-- بطاقة الطوارئ -->
+      <div class="glass card" onclick="go('emergency-flow.html')" style="cursor:pointer;">
+        <h2>مسار الطوارئ</h2>
+        <p>إجراءات فورية للحالات الحرجة وفق بروتوكول السلامة المدرسية.</p>
+      </div>
+
+    </main>
+
   </div>
-</div>
 
-<script src="assets/js/auth.js"></script>
+  <!-- ملفات JS -->
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/router.js"></script>
+
 </body>
 </html>
