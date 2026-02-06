@@ -3,116 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>مسار الطوارئ – العيادة المدرسية الذكية</title>
 
-  <!-- أيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-
-  <!-- الثيم العام -->
-  <link rel="stylesheet" href="assets/css/global.css" />
-
-  <!-- ستايل مسار الطوارئ -->
-  <link rel="stylesheet" href="assets/css/emergency.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body>
-  <div class="app-shell fade-in">
+<body data-page="emergency">
+  <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:16px;">
 
-    <!-- الهيدر -->
-    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
-      <div class="brand" style="display:flex;align-items:center;gap:14px;">
-        <div class="brand-mark" style="
-          width:48px;height:48px;border-radius:14px;
-          background:linear-gradient(135deg,#ff4757,#ff6b81);
-          display:flex;align-items:center;justify-content:center;
-          font-weight:700;font-size:1.1rem;">
-          EM
-        </div>
-        <div class="brand-text">
-          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">مسار الطوارئ</div>
-          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
-            إجراءات فورية للحالات الحرجة
+    <header class="app-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-mark">EM</div>
+        <div>
+          <div style="font-weight:600;">مسار الطوارئ</div>
+          <div class="text-soft" style="font-size:0.8rem;">
+            بروتوكول التعامل مع الحالات الحرجة في المدرسة
           </div>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button id="theme-toggle" class="icon-btn">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="icon-btn" id="theme-toggle">
           <span class="material-symbols-rounded">brightness_6</span>
         </button>
-
-        <button class="icon-btn danger" onclick="home()">
-          <span class="material-symbols-rounded">logout</span>
+        <button class="icon-btn danger" onclick="back()">
+          <span class="material-symbols-rounded">arrow_back</span>
         </button>
       </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="fade-in" style="display:flex;flex-direction:column;gap:20px;">
+    <main class="glass card" style="display:flex;flex-direction:column;gap:10px;">
+      <h2 style="font-size:1rem;">خطوات مسار الطوارئ</h2>
+      <ol style="margin-right:18px;font-size:0.9rem;">
+        <li>تقييم المؤشرات الحيوية فورًا.</li>
+        <li>عزل الطالب في غرفة مخصصة.</li>
+        <li>إخطار الطبيب المناوب.</li>
+        <li>التواصل مع ولي الأمر.</li>
+        <li>تجهيز تقرير الحالة وإجراءات النقل إن لزم.</li>
+      </ol>
+    </main>
 
-      <!-- تنبيه رئيسي -->
-      <section class="glass card" style="padding:20px;border-right:4px solid var(--danger);">
-        <h2 style="color:var(--danger);">⚠ حالة طارئة</h2>
-        <p>الطالب: <strong>أحمد خالد</strong></p>
-        <p>العمر: <strong>10 سنوات</strong></p>
-        <p>آخر تحديث: <strong>قبل دقيقة</strong></p>
-        <p>مستوى الخطورة: <span class="badge badge-critical">حرجة</span></p>
-      </section>
+  </div>
 
-      <!-- خطوات الطوارئ -->
-      <section class="glass card" style="padding:20px;">
-        <h2>الخطوات الفورية</h2>
-
-        <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px;">
-
-          <div class="glass" style="padding:14px;border-radius:var(--radius-md);display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <strong>1) تقييم المؤشرات الحيوية</strong><br>
-              <span class="text-muted">قياس الحرارة – النبض – الأكسجين – الضغط</span>
-            </div>
-            <button class="primary-btn" onclick="go('case-details.html')">عرض</button>
-          </div>
-
-          <div class="glass" style="padding:14px;border-radius:var(--radius-md);display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <strong>2) عزل الطالب</strong><br>
-              <span class="text-muted">نقل الطالب لمنطقة آمنة</span>
-            </div>
-            <button class="primary-btn" onclick="alert('تم تأكيد العزل')">تأكيد</button>
-          </div>
-
-          <div class="glass" style="padding:14px;border-radius:var(--radius-md);display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <strong>3) إخطار الطبيب</strong><br>
-              <span class="text-muted">إرسال تنبيه للطبيب المناوب</span>
-            </div>
-            <button class="primary-btn" onclick="go('doctor.html')">فتح لوحة الطبيب</button>
-          </div>
-
-          <div class="glass" style="padding:14px;border-radius:var(--radius-md);display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <strong>4) التواصل مع ولي الأمر</strong><br>
-              <span class="text-muted">إرسال إشعار فوري</span>
-            </div>
-            <button class="primary-btn" onclick="go('parent.html')">فتح واجهة ولي الأمر</button>
-          </div>
-
-          <div class="glass" style="padding:14px;border-radius:var(--radius-md);display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <strong>5) تجهيز تقرير الحالة</strong><br>
-              <span class="text-muted">تجهيز تقرير PDF للطوارئ</span>
-            </div>
-            <button class="primary-btn" onclick="alert('تم تجهيز التقرير')">تجهيز</button>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- إجراءات سريعة -->
-      <section class="glass card" style="padding:20px;">
-        <h2>إجراءات سريعة</h2>
-
-        <div style="display:flex;gap:10px;margin-top:12px;">
-          <button class="primary-btn" onclick="go('case-details.html')">تفاصيل الحالة</button>
-          <button class="primary-btn" onclick="go('nurse-dashboard.html')">لوحة التمريض</button>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
