@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>تقرير الطالب – العيادة المدرسية الذكية</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
@@ -11,10 +10,8 @@
 </head>
 
 <body data-page="student-self">
-
   <div class="app-shell fade-in">
 
-    <!-- الهيدر -->
     <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
       <div class="brand" style="display:flex;align-items:center;gap:14px;">
         <div class="brand-mark" style="
@@ -37,7 +34,6 @@
       </button>
     </header>
 
-    <!-- المحتوى -->
     <main style="display:flex;flex-direction:column;gap:20px;">
 
       <!-- الأعراض -->
@@ -45,7 +41,7 @@
         <h2>الأعراض</h2>
         <p>اختر الأعراض التي تشعر بها:</p>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:12px;">
+        <div class="symptom-grid">
           <label class="glass symptom">
             <input type="checkbox" value="صداع">
             صداع
@@ -87,11 +83,11 @@
       <section class="glass card" style="padding:20px;">
         <h2>المؤشرات الحيوية</h2>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px;">
-          <input class="glass" id="temp" type="number" placeholder="الحرارة (°C)" style="padding:12px;border-radius:var(--radius-md);border:none;">
-          <input class="glass" id="pulse" type="number" placeholder="النبض (bpm)" style="padding:12px;border-radius:var(--radius-md);border:none;">
-          <input class="glass" id="oxygen" type="number" placeholder="الأكسجين (%)" style="padding:12px;border-radius:var(--radius-md);border:none;">
-          <input class="glass" id="bp" type="text" placeholder="الضغط (مثال: 110/70)" style="padding:12px;border-radius:var(--radius-md);border:none;">
+        <div class="vitals-grid">
+          <input class="glass" id="temp" type="number" placeholder="الحرارة (°C)">
+          <input class="glass" id="pulse" type="number" placeholder="النبض (bpm)">
+          <input class="glass" id="oxygen" type="number" placeholder="الأكسجين (%)">
+          <input class="glass" id="bp" type="text" placeholder="الضغط (مثال: 110/70)">
         </div>
       </section>
 
@@ -100,7 +96,7 @@
         <h2>تحليل الذكاء الاصطناعي</h2>
         <p>بعد إدخال الأعراض، اضغط على زر التحليل:</p>
 
-        <button class="primary-btn" style="margin-top:12px;" onclick="analyzeSymptoms()">
+        <button class="primary-btn" style="margin-top:12px;" onclick="studentSelfReport.analyzeSymptoms()">
           تحليل الحالة
         </button>
 
@@ -112,7 +108,7 @@
         <h2>زيارة افتراضية</h2>
         <p>إذا كنت تحتاج التواصل مع الطبيب مباشرة:</p>
 
-        <button class="primary-btn" style="margin-top:12px;" onclick="startVirtualVisit()">
+        <button class="primary-btn" style="margin-top:12px;" onclick="studentSelfReport.startVirtualVisit()">
           بدء زيارة صوت وصورة
         </button>
       </section>
