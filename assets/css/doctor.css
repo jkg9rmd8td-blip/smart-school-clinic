@@ -1,0 +1,11 @@
+/* ================================
+   DOCTOR PANEL CINEMATIC STYLE
+   ================================ */
+
+#critical-cases .glass {
+  border-right: 4px solid var(--danger);
+}
+
+.table-wrapper tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
