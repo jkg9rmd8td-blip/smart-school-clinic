@@ -3,149 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة الإدارة – العيادة المدرسية الذكية</title>
 
-  <title>لوحة المدير – العيادة المدرسية الذكية</title>
-
-  <!-- أيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-
-  <!-- الثيم العام -->
-  <link rel="stylesheet" href="assets/css/global.css" />
-
-  <!-- ستايل لوحة المدير -->
-  <link rel="stylesheet" href="assets/css/admin.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body>
-  <div class="app-shell fade-in">
+<body data-page="admin">
+  <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:18px;">
 
-    <!-- الهيدر -->
-    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
-      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+    <!-- AppBar -->
+    <header class="app-header glass" style="padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="display:flex;align-items:center;gap:10px;">
         <div class="brand-mark" style="
-          width:48px;height:48px;border-radius:14px;
-          background:linear-gradient(135deg,#7b5cff,#a08cff);
+          width:40px;height:40px;border-radius:14px;
+          background:linear-gradient(135deg,#ffb347,#ff6b6b);
           display:flex;align-items:center;justify-content:center;
-          font-weight:700;font-size:1.1rem;">
-          SC
+          font-weight:700;font-size:1rem;">
+          AD
         </div>
-        <div class="brand-text">
-          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">لوحة المدير</div>
-          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
-            إدارة النظام – العيادة المدرسية الذكية
+        <div>
+          <div style="font-weight:600;">لوحة الإدارة</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);">
+            مؤشرات، تقارير، صلاحيات، حوكمة صحية مدرسية
           </div>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button id="theme-toggle" class="icon-btn">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="icon-btn" id="theme-toggle">
           <span class="material-symbols-rounded">brightness_6</span>
         </button>
-
         <button class="icon-btn danger" onclick="home()">
           <span class="material-symbols-rounded">logout</span>
         </button>
       </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="fade-in" style="display:flex;flex-direction:column;gap:20px;">
+    <!-- Layout -->
+    <main style="flex:1;display:grid;grid-template-columns:2fr 1.4fr;gap:16px;">
 
-      <!-- الصف الأول: الإحصائيات -->
-      <section style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
-        <div class="glass card stat-card">
-          <h3>عدد الحالات اليوم</h3>
-          <div class="stat-number">42</div>
+      <!-- يسار: KPIs + مخطط مبسط + حالات حسب الصف -->
+      <section style="display:flex;flex-direction:column;gap:12px;">
+
+        <!-- KPIs -->
+        <div class="glass card" style="padding:14px;">
+          <h2 style="font-size:1rem;margin-bottom:8px;">مؤشرات اليوم</h2>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
+              <div style="font-size:0.8rem;color:var(--text-muted);">إجمالي الحالات</div>
+              <div style="font-size:1.4rem;font-weight:700;">24</div>
+            </div>
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
+              <div style="font-size:0.8rem;color:var(--text-muted);">حالات حرجة</div>
+              <div style="font-size:1.4rem;font-weight:700;color:var(--danger);">3</div>
+            </div>
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
+              <div style="font-size:0.8rem;color:var(--text-muted);">متوسط الاستجابة</div>
+              <div style="font-size:1.4rem;font-weight:700;">7 د</div>
+            </div>
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
+              <div style="font-size:0.8rem;color:var(--text-muted);">زيارات افتراضية</div>
+              <div style="font-size:1.4rem;font-weight:700;">5</div>
+            </div>
+          </div>
         </div>
 
-        <div class="glass card stat-card">
-          <h3>الحالات الحرجة</h3>
-          <div class="stat-number" style="color:var(--danger);">3</div>
+        <!-- توزيع الحالات حسب الصف -->
+        <div class="glass card" style="padding:14px;flex:1;">
+          <h2 style="font-size:1rem;margin-bottom:8px;">توزيع الحالات حسب الصف</h2>
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:0.9rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span>الصف الرابع</span>
+              <div style="flex:1;margin:0 8px;height:6px;border-radius:999px;background:rgba(255,255,255,0.06);">
+                <div style="width:60%;height:100%;border-radius:999px;background:linear-gradient(90deg,#7b5cff,#a08cff);"></div>
+              </div>
+              <span>9 حالات</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span>الصف الخامس</span>
+              <div style="flex:1;margin:0 8px;height:6px;border-radius:999px;background:rgba(255,255,255,0.06);">
+                <div style="width:40%;height:100%;border-radius:999px;background:linear-gradient(90deg,#4f8cff,#7b5cff);"></div>
+              </div>
+              <span>6 حالات</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span>الصف السادس</span>
+              <div style="flex:1;margin:0 8px;height:6px;border-radius:999px;background:rgba(255,255,255,0.06);">
+                <div style="width:30%;height:100%;border-radius:999px;background:linear-gradient(90deg,#ffb347,#ff6b6b);"></div>
+              </div>
+              <span>4 حالات</span>
+            </div>
+          </div>
         </div>
 
-        <div class="glass card stat-card">
-          <h3>عدد الطلاب</h3>
-          <div class="stat-number">512</div>
-        </div>
-
-        <div class="glass card stat-card">
-          <h3>عدد المستخدمين</h3>
-          <div class="stat-number">14</div>
-        </div>
       </section>
 
-      <!-- الصف الثاني: إدارة النظام -->
-      <section class="glass card" style="padding:20px;">
-        <h2>إدارة النظام</h2>
+      <!-- يمين: صلاحيات + إدارة النظام -->
+      <section style="display:flex;flex-direction:column;gap:12px;">
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px;">
-
-          <div class="glass admin-tile" onclick="go('nurse-dashboard.html')" style="cursor:pointer;padding:16px;">
-            <span class="material-symbols-rounded" style="font-size:32px;">monitor_heart</span>
-            <h3>لوحة التمريض</h3>
-            <p>عرض الحالات اليومية والتنبيهات.</p>
+        <!-- مصفوفة الصلاحيات -->
+        <div class="glass card" style="padding:14px;">
+          <h2 style="font-size:1rem;margin-bottom:8px;">مصفوفة الصلاحيات</h2>
+          <div class="table-wrapper" style="font-size:0.85rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>الدور</th>
+                  <th>قراءة الحالات</th>
+                  <th>تعديل</th>
+                  <th>طوارئ</th>
+                  <th>تقارير</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>الطالب</td>
+                  <td>✔ (حالاته فقط)</td>
+                  <td>✔ (أعراضه)</td>
+                  <td>✖</td>
+                  <td>✖</td>
+                </tr>
+                <tr>
+                  <td>ولي الأمر</td>
+                  <td>✔ (أبنائه)</td>
+                  <td>✖</td>
+                  <td>✖</td>
+                  <td>✖</td>
+                </tr>
+                <tr>
+                  <td>التمريض</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                  <td>✖</td>
+                </tr>
+                <tr>
+                  <td>الطبيب</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                  <td>✔</td>
+                  <td>✔ (طبية)</td>
+                </tr>
+                <tr>
+                  <td>الإدارة</td>
+                  <td>✔</td>
+                  <td>✔ (صلاحيات)</td>
+                  <td>✔ (بروتوكول)</td>
+                  <td>✔ (حوكمة)</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-
-          <div class="glass admin-tile" onclick="go('doctor.html')" style="cursor:pointer;padding:16px;">
-            <span class="material-symbols-rounded" style="font-size:32px;">stethoscope</span>
-            <h3>لوحة الطبيب</h3>
-            <p>تشخيص الحالات ومراجعة المؤشرات الحيوية.</p>
-          </div>
-
-          <div class="glass admin-tile" onclick="go('parent.html')" style="cursor:pointer;padding:16px;">
-            <span class="material-symbols-rounded" style="font-size:32px;">family_restroom</span>
-            <h3>واجهة ولي الأمر</h3>
-            <p>متابعة حالة الطالب الصحية.</p>
-          </div>
-
-          <div class="glass admin-tile" onclick="go('student-profile.html')" style="cursor:pointer;padding:16px;">
-            <span class="material-symbols-rounded" style="font-size:32px;">person_search</span>
-            <h3>إدارة الطلاب</h3>
-            <p>عرض وتحديث بيانات الطلاب.</p>
-          </div>
-
-          <div class="glass admin-tile" onclick="go('case-details.html')" style="cursor:pointer;padding:16px;">
-            <span class="material-symbols-rounded" style="font-size:32px;">add_notes</span>
-            <h3>إضافة حالة</h3>
-            <p>تسجيل حالة جديدة في النظام.</p>
-          </div>
-
-          <div class="glass admin-tile" onclick="go('emergency-flow.html')" style="cursor:pointer;padding:16px;">
-            <span class="material-symbols-rounded" style="font-size:32px;">emergency</span>
-            <h3>مسار الطوارئ</h3>
-            <p>إدارة الحالات الحرجة.</p>
-          </div>
-
         </div>
-      </section>
 
-      <!-- الصف الثالث: التقارير -->
-      <section class="glass card" style="padding:20px;">
-        <h2>التقارير</h2>
-
-        <div style="display:flex;gap:10px;margin-top:12px;">
-          <button class="primary-btn" onclick="alert('تم إنشاء تقرير يومي')">
-            تقرير يومي
-          </button>
-
-          <button class="primary-btn" onclick="alert('تم إنشاء تقرير أسبوعي')">
-            تقرير أسبوعي
-          </button>
-
-          <button class="primary-btn" onclick="alert('تم إنشاء تقرير شهري')">
-            تقرير شهري
-          </button>
+        <!-- إدارة النظام -->
+        <div class="glass card" style="padding:14px;flex:1;">
+          <h2 style="font-size:1rem;margin-bottom:8px;">إدارة النظام</h2>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:0.9rem;">
+            <button class="primary-btn" onclick="go('nurse-dashboard.html')">لوحة التمريض</button>
+            <button class="primary-btn" onclick="go('doctor.html')">لوحة الطبيب</button>
+            <button class="primary-btn" onclick="go('parent.html')">واجهة ولي الأمر</button>
+            <button class="primary-btn" onclick="go('student-self-report.html')">واجهة الطالب</button>
+            <button class="primary-btn" onclick="go('emergency-flow.html')">مسار الطوارئ</button>
+            <button class="primary-btn" onclick="alert('تقرير شهري (محاكاة)')">تقرير شهري</button>
+          </div>
         </div>
+
       </section>
 
     </main>
 
   </div>
 
-  <!-- ملفات JS -->
-  <script src="assets/js/theme.js"></script>
-  <script src="assets/js/router.js"></script>
-  <script src="assets/js/admin.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
