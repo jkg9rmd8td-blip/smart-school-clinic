@@ -151,6 +151,61 @@ const emergencyFlow = {
 
 
 /* ============================================================
+   STUDENT SELF-REPORT MODULE (student-self-report.html)
+============================================================ */
+
+const studentSelfReport = {
+  init() {
+    console.log("Student Self-Report Page Loaded");
+  },
+
+  analyzeSymptoms() {
+    const symptoms = [...document.querySelectorAll(".symptom input:checked")].map(i => i.value);
+
+    const temp = parseFloat(document.getElementById("temp").value);
+    const pulse = parseFloat(document.getElementById("pulse").value);
+    const oxygen = parseFloat(document.getElementById("oxygen").value);
+    const bp = document.getElementById("bp").value;
+
+    let result = "";
+    let risk = "normal";
+
+    // تحليل الأعراض
+    if (symptoms.includes("ضيق تنفس") || symptoms.includes("حرارة") && temp >= 39) {
+      risk = "critical";
+      result += "⚠ الحالة حرجة. يجب التوجه للعيادة فورًا.<br>";
+    }
+
+    if (oxygen && oxygen < 93) {
+      risk = "critical";
+      result += "⚠ انخفاض في مستوى الأكسجين.<br>";
+    }
+
+    if (pulse && pulse > 120) {
+      risk = "watch";
+      result += "⚠ نبض مرتفع يحتاج متابعة.<br>";
+    }
+
+    if (risk === "normal") {
+      result = "✔ الحالة مستقرة. يُنصح بالراحة وشرب الماء.";
+    }
+
+    document.getElementById("ai-result").innerHTML = `
+      <div class="glass" style="padding:14px;border-radius:var(--radius-md);margin-top:10px;">
+        <strong>توصية الذكاء الاصطناعي:</strong><br>
+        ${result}
+      </div>
+    `;
+  },
+
+  startVirtualVisit() {
+    alert("سيتم فتح غرفة زيارة افتراضية (صوت + صورة)");
+    go("video-call.html");
+  }
+};
+
+
+/* ============================================================
    PAGE AUTO-INIT
 ============================================================ */
 
@@ -165,5 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
     case "case": caseDetails.init(); break;
     case "student": studentProfile.init(); break;
     case "emergency": emergencyFlow.init(); break;
+    case "student-self": studentSelfReport.init(); break;
+
   }
 });
