@@ -1,32 +1,150 @@
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/workflow.js"></script>
-<script>guard(['doctor'])</script>
-<link rel="stylesheet" href="assets/css/apple.css"/>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="container">
-<h1>👨‍⚕️ لوحة الطبيب</h1>
+  <title>لوحة الطبيب – العيادة المدرسية الذكية</title>
 
-<div class="card" id="caseBox"></div>
+  <!-- أيقونات -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 
-<script>
-const c = getCase();
-if(!c){
-  caseBox.innerHTML = "<p>لا توجد حالات</p>";
-}else{
-  caseBox.innerHTML = `
-    <p><b>الطالب:</b> ${c.student}</p>
-    <p><b>الأعراض:</b> ${c.symptoms.join("، ")}</p>
-    <button class="btn" onclick="decide('مراقبة')">مراقبة</button>
-    <button class="btn" onclick="decide('إحالة')">إحالة</button>
-  `;
-}
+  <!-- الثيم العام -->
+  <link rel="stylesheet" href="assets/css/global.css" />
 
-function decide(d){
-  updateCase({
-    doctorDecision: d,
-    status: "reviewed"
-  });
-  alert("تم تحديث الحالة وإشعار ولي الأمر");
-}
-</script>
-</div>
+  <!-- ستايل لوحة الطبيب -->
+  <link rel="stylesheet" href="assets/css/doctor.css" />
+</head>
+
+<body>
+  <div class="app-shell fade-in">
+
+    <!-- الهيدر -->
+    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
+      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+        <div class="brand-mark" style="
+          width:48px;height:48px;border-radius:14px;
+          background:linear-gradient(135deg,#7b5cff,#a08cff);
+          display:flex;align-items:center;justify-content:center;
+          font-weight:700;font-size:1.1rem;">
+          SC
+        </div>
+        <div class="brand-text">
+          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">لوحة الطبيب</div>
+          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
+            تشخيص الحالات – العيادة المدرسية الذكية
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button id="theme-toggle" class="icon-btn">
+          <span class="material-symbols-rounded">brightness_6</span>
+        </button>
+
+        <button class="icon-btn danger" onclick="home()">
+          <span class="material-symbols-rounded">logout</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="fade-in" style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- الحالات الحرجة -->
+      <section class="glass card" style="padding:20px;">
+        <h2>الحالات الحرجة</h2>
+
+        <div id="critical-cases" style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+          <div class="glass" style="padding:14px;border-radius:var(--radius-md);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <strong>الطالب: أحمد خالد</strong><br>
+              <span class="badge badge-critical">حرجة</span>
+            </div>
+            <button class="primary-btn" onclick="go('case-details.html')">عرض الحالة</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- الحالات تحت المتابعة -->
+      <section class="glass card" style="padding:20px;">
+        <h2>الحالات تحت المتابعة</h2>
+
+        <div class="table-wrapper" style="margin-top:10px;">
+          <table>
+            <thead>
+              <tr>
+                <th>اسم الطالب</th>
+                <th>العمر</th>
+                <th>آخر تحديث</th>
+                <th>الإجراء</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>سارة محمد</td>
+                <td>11</td>
+                <td>قبل 10 دقائق</td>
+                <td><button class="primary-btn" onclick="go('case-details.html')">عرض</button></td>
+              </tr>
+
+              <tr>
+                <td>عبدالله ناصر</td>
+                <td>9</td>
+                <td>قبل 25 دقيقة</td>
+                <td><button class="primary-btn" onclick="go('case-details.html')">عرض</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- المؤشرات الحيوية -->
+      <section class="glass card" style="padding:20px;">
+        <h2>المؤشرات الحيوية</h2>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px;">
+          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
+            <h3>الحرارة</h3>
+            <p style="font-size:1.4rem;">37.8°C</p>
+          </div>
+
+          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
+            <h3>النبض</h3>
+            <p style="font-size:1.4rem;">92 bpm</p>
+          </div>
+
+          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
+            <h3>الأكسجين</h3>
+            <p style="font-size:1.4rem;">96%</p>
+          </div>
+
+          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
+            <h3>الضغط</h3>
+            <p style="font-size:1.4rem;">110 / 70</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- إجراءات سريعة -->
+      <section class="glass card" style="padding:20px;">
+        <h2>إجراءات سريعة</h2>
+
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="primary-btn" onclick="go('case-details.html')">إضافة تشخيص</button>
+          <button class="primary-btn" onclick="go('student-profile.html')">ملف الطالب</button>
+          <button class="primary-btn" onclick="go('nurse-dashboard.html')">لوحة التمريض</button>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ملفات JS -->
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/doctor.js"></script>
+
+</body>
+</html>
