@@ -3,148 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>لوحة الطبيب – العيادة المدرسية الذكية</title>
 
-  <!-- أيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-
-  <!-- الثيم العام -->
-  <link rel="stylesheet" href="assets/css/global.css" />
-
-  <!-- ستايل لوحة الطبيب -->
-  <link rel="stylesheet" href="assets/css/doctor.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body>
-  <div class="app-shell fade-in">
+<body data-page="doctor">
+  <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:18px;">
 
-    <!-- الهيدر -->
-    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
-      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+    <!-- AppBar -->
+    <header class="app-header glass" style="padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="display:flex;align-items:center;gap:10px;">
         <div class="brand-mark" style="
-          width:48px;height:48px;border-radius:14px;
-          background:linear-gradient(135deg,#7b5cff,#a08cff);
+          width:40px;height:40px;border-radius:14px;
+          background:linear-gradient(135deg,#4f8cff,#7b5cff);
           display:flex;align-items:center;justify-content:center;
-          font-weight:700;font-size:1.1rem;">
-          SC
+          font-weight:700;font-size:1rem;">
+          DR
         </div>
-        <div class="brand-text">
-          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">لوحة الطبيب</div>
-          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
-            تشخيص الحالات – العيادة المدرسية الذكية
+        <div>
+          <div style="font-weight:600;">لوحة الطبيب</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);">
+            تشخيص، متابعة، زيارات افتراضية، دعم بالذكاء الاصطناعي
           </div>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button id="theme-toggle" class="icon-btn">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="icon-btn" id="theme-toggle">
           <span class="material-symbols-rounded">brightness_6</span>
         </button>
-
         <button class="icon-btn danger" onclick="home()">
           <span class="material-symbols-rounded">logout</span>
         </button>
       </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="fade-in" style="display:flex;flex-direction:column;gap:20px;">
+    <!-- Layout -->
+    <main style="flex:1;display:grid;grid-template-columns:2.1fr 1.4fr;gap:16px;">
 
-      <!-- الحالات الحرجة -->
-      <section class="glass card" style="padding:20px;">
-        <h2>الحالات الحرجة</h2>
+      <!-- يسار: قائمة الحالات + تفاصيل الحالة -->
+      <section style="display:flex;flex-direction:column;gap:12px;">
 
-        <div id="critical-cases" style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
-          <div class="glass" style="padding:14px;border-radius:var(--radius-md);display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <strong>الطالب: أحمد خالد</strong><br>
-              <span class="badge badge-critical">حرجة</span>
+        <!-- قائمة الحالات -->
+        <div class="glass card" style="padding:14px;flex:1;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h2 style="font-size:1rem;">قائمة الحالات</h2>
+            <span class="badge badge-normal">اليوم</span>
+          </div>
+
+          <div id="doctor-cases" style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+            <!-- يتم تعبئتها من JS -->
+          </div>
+        </div>
+
+        <!-- تفاصيل الحالة المختارة -->
+        <div class="glass card" style="padding:14px;flex:1.2;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h2 style="font-size:1rem;">تفاصيل الحالة</h2>
+            <button class="primary-btn" onclick="go('student-profile.html')">ملف الطالب</button>
+          </div>
+
+          <div id="case-summary" style="font-size:0.9rem;color:var(--text-main);">
+            اختر حالة من القائمة لعرض تفاصيلها.
+          </div>
+
+          <div style="margin-top:8px;">
+            <h3 style="font-size:0.9rem;margin-bottom:4px;">المؤشرات الحيوية</h3>
+            <div id="case-vitals" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:0.85rem;">
+              <!-- تعبئة من JS -->
             </div>
-            <button class="primary-btn" onclick="go('case-details.html')">عرض الحالة</button>
+          </div>
+
+          <div style="margin-top:8px;">
+            <h3 style="font-size:0.9rem;margin-bottom:4px;">التشخيص الطبي</h3>
+            <textarea id="doctor-diagnosis" placeholder="أدخل التشخيص الطبي هنا..."
+              style="width:100%;height:80px;border-radius:var(--radius-md);padding:8px;background:var(--bg-card);color:var(--text-main);border:none;outline:none;"></textarea>
+            <div style="margin-top:6px;display:flex;gap:8px;">
+              <button class="primary-btn" onclick="doctorPanel.saveDiagnosis()">حفظ التشخيص</button>
+              <button class="primary-btn danger" onclick="go('emergency-flow.html')">تحويل لمسار الطوارئ</button>
+            </div>
           </div>
         </div>
+
       </section>
 
-      <!-- الحالات تحت المتابعة -->
-      <section class="glass card" style="padding:20px;">
-        <h2>الحالات تحت المتابعة</h2>
+      <!-- يمين: AI + زيارة افتراضية + Snapshot -->
+      <section style="display:flex;flex-direction:column;gap:12px;">
 
-        <div class="table-wrapper" style="margin-top:10px;">
-          <table>
-            <thead>
-              <tr>
-                <th>اسم الطالب</th>
-                <th>العمر</th>
-                <th>آخر تحديث</th>
-                <th>الإجراء</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>سارة محمد</td>
-                <td>11</td>
-                <td>قبل 10 دقائق</td>
-                <td><button class="primary-btn" onclick="go('case-details.html')">عرض</button></td>
-              </tr>
-
-              <tr>
-                <td>عبدالله ناصر</td>
-                <td>9</td>
-                <td>قبل 25 دقيقة</td>
-                <td><button class="primary-btn" onclick="go('case-details.html')">عرض</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- المؤشرات الحيوية -->
-      <section class="glass card" style="padding:20px;">
-        <h2>المؤشرات الحيوية</h2>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px;">
-          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
-            <h3>الحرارة</h3>
-            <p style="font-size:1.4rem;">37.8°C</p>
-          </div>
-
-          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
-            <h3>النبض</h3>
-            <p style="font-size:1.4rem;">92 bpm</p>
-          </div>
-
-          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
-            <h3>الأكسجين</h3>
-            <p style="font-size:1.4rem;">96%</p>
-          </div>
-
-          <div class="glass" style="padding:16px;border-radius:var(--radius-md);">
-            <h3>الضغط</h3>
-            <p style="font-size:1.4rem;">110 / 70</p>
+        <!-- AI Assist -->
+        <div class="glass card" style="padding:14px;">
+          <h2 style="font-size:1rem;margin-bottom:6px;">مساعد الذكاء الاصطناعي</h2>
+          <div id="ai-assist" style="font-size:0.9rem;color:var(--text-main);">
+            اختر حالة ليتم تحليل الأعراض والفايتلز واقتراح مستوى الخطورة.
           </div>
         </div>
-      </section>
 
-      <!-- إجراءات سريعة -->
-      <section class="glass card" style="padding:20px;">
-        <h2>إجراءات سريعة</h2>
-
-        <div style="display:flex;gap:10px;margin-top:12px;">
-          <button class="primary-btn" onclick="go('case-details.html')">إضافة تشخيص</button>
-          <button class="primary-btn" onclick="go('student-profile.html')">ملف الطالب</button>
-          <button class="primary-btn" onclick="go('nurse-dashboard.html')">لوحة التمريض</button>
+        <!-- زيارة افتراضية -->
+        <div class="glass card" style="padding:14px;">
+          <h2 style="font-size:1rem;margin-bottom:6px;">زيارة افتراضية</h2>
+          <p style="font-size:0.85rem;color:var(--text-muted);">
+            يمكن للطبيب بدء زيارة افتراضية مع الطالب وولي الأمر في نفس الجلسة.
+          </p>
+          <button class="primary-btn" style="margin-top:8px;" onclick="go('video-call.html')">
+            بدء زيارة صوت وصورة
+          </button>
         </div>
+
+        <!-- Snapshot -->
+        <div class="glass card" style="padding:14px;flex:1;">
+          <h2 style="font-size:1rem;margin-bottom:6px;">ملخص الطالب</h2>
+          <div id="patient-snapshot" style="font-size:0.9rem;color:var(--text-main);">
+            لا توجد حالة محددة حاليًا.
+          </div>
+        </div>
+
       </section>
 
     </main>
 
   </div>
 
-  <!-- ملفات JS -->
-  <script src="assets/js/theme.js"></script>
-  <script src="assets/js/router.js"></script>
-  <script src="assets/js/doctor.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
