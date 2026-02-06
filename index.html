@@ -10,117 +10,99 @@
 </head>
 
 <body data-page="landing">
-  <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:24px;">
+  <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:20px;">
 
-    <!-- شريط علوي -->
-    <header class="app-header glass" style="padding:16px 24px;display:flex;justify-content:space-between;align-items:center;">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <div class="brand-mark" style="
-          width:42px;height:42px;border-radius:14px;
-          background:linear-gradient(135deg,#7b5cff,#a08cff);
-          display:flex;align-items:center;justify-content:center;
-          font-weight:700;font-size:1rem;">
-          SC
-        </div>
+    <header class="app-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-mark">SC</div>
         <div>
-          <div style="font-weight:600;font-size:1.05rem;">العيادة المدرسية الذكية</div>
-          <div style="font-size:0.8rem;color:var(--text-muted);">
+          <div style="font-weight:600;">العيادة المدرسية الذكية</div>
+          <div class="text-soft" style="font-size:0.8rem;">
             منصة صحية وقائية متكاملة في بيئة المدرسة
           </div>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;">
+      <div style="display:flex;align-items:center;gap:8px;">
         <button class="icon-btn" id="theme-toggle">
           <span class="material-symbols-rounded">brightness_6</span>
         </button>
       </div>
     </header>
 
-    <!-- الهيرو -->
-    <main style="flex:1;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.4fr);gap:24px;align-items:stretch;">
+    <main style="flex:1;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.4fr);gap:18px;align-items:stretch;">
 
-      <!-- يسار: النص + الأدوار -->
-      <section class="glass card" style="padding:24px;display:flex;flex-direction:column;gap:18px;">
+      <section class="glass card" style="display:flex;flex-direction:column;gap:16px;">
         <div>
-          <h1 style="font-size:1.8rem;margin-bottom:8px;">منصة صحية مدرسية بمستوى حكومي</h1>
-          <p style="color:var(--text-muted);max-width:520px;">
+          <h1 style="font-size:1.7rem;margin-bottom:6px;">منصة صحية مدرسية بمستوى حكومي</h1>
+          <p class="text-soft" style="max-width:520px;font-size:0.9rem;">
             إدارة الحالات الصحية، الطوارئ، الزيارات الافتراضية، ولوحات تحكم للأدوار المختلفة
             (طالب، ولي أمر، تمريض، طبيب، إدارة) في منصة واحدة متكاملة.
           </p>
         </div>
 
-        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;">
-          <button class="primary-btn" onclick="go('nurse-dashboard.html')">
-            دخول لوحة التمريض
-          </button>
-          <button class="primary-btn" onclick="go('doctor.html')">
-            دخول لوحة الطبيب
-          </button>
-          <button class="primary-btn" onclick="go('admin.html')">
-            دخول لوحة الإدارة
-          </button>
-          <button class="primary-btn" onclick="go('student-self-report.html')">
-            دخول واجهة الطالب
-          </button>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <button class="primary-btn" onclick="go('nurse-dashboard.html')">لوحة التمريض</button>
+          <button class="primary-btn" onclick="go('doctor.html')">لوحة الطبيب</button>
+          <button class="primary-btn" onclick="go('admin.html')">لوحة الإدارة</button>
+          <button class="primary-btn" onclick="go('student-self-report.html')">واجهة الطالب</button>
+          <button class="primary-btn" onclick="go('parent.html')">واجهة ولي الأمر</button>
         </div>
 
-        <div style="margin-top:18px;">
-          <h3 style="font-size:0.95rem;margin-bottom:8px;">الأدوار في المنصة</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
-            <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+        <div>
+          <h3 style="font-size:0.9rem;margin-bottom:6px;">الأدوار في المنصة</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;">
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>الطالب</strong><br>
-              <span class="text-muted">إدخال الأعراض والفايتلز، توصية AI، زيارة افتراضية.</span>
+              <span class="text-soft">إدخال الأعراض والفايتلز، توصية AI، زيارة افتراضية.</span>
             </div>
-            <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>ولي الأمر</strong><br>
-              <span class="text-muted">متابعة حالة الابن، التنبيهات، طلب خروج، زيارة افتراضية.</span>
+              <span class="text-soft">متابعة حالة الابن، التنبيهات، طلب خروج، زيارة افتراضية.</span>
             </div>
-            <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>التمريض</strong><br>
-              <span class="text-muted">إدارة الحالات اليومية، مسار الطوارئ، الربط مع الطبيب.</span>
+              <span class="text-soft">إدارة الحالات اليومية، مسار الطوارئ، الربط مع الطبيب.</span>
             </div>
-            <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>الطبيب</strong><br>
-              <span class="text-muted">تشخيص، توصيات، متابعة، زيارات افتراضية، إدارة خطة العلاج.</span>
+              <span class="text-soft">تشخيص، متابعة، زيارات افتراضية، دعم بالذكاء الاصطناعي.</span>
             </div>
-            <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+            <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>الإدارة</strong><br>
-              <span class="text-muted">لوحة مؤشرات، تقارير، صلاحيات، حوكمة صحية مدرسية.</span>
+              <span class="text-soft">لوحة مؤشرات، تقارير، صلاحيات، حوكمة صحية مدرسية.</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- يمين: لوحة مؤشرات سينمائية -->
       <section class="glass card" style="
-        padding:20px;
-        display:flex;
-        flex-direction:column;
-        gap:14px;
         background:radial-gradient(circle at top,#2b2b3f,#050509);
+        display:flex;flex-direction:column;gap:12px;
       ">
-        <h2>لوحة مؤشرات لحظية</h2>
+        <h2 style="font-size:1rem;">لوحة مؤشرات لحظية</h2>
 
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
-          <div class="glass" style="padding:12px;border-radius:var(--radius-md);text-align:center;">
-            <div style="font-size:0.8rem;color:var(--text-muted);">حالات اليوم</div>
-            <div style="font-size:1.6rem;font-weight:700;">24</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+          <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
+            <div class="text-soft" style="font-size:0.8rem;">حالات اليوم</div>
+            <div style="font-size:1.5rem;font-weight:700;">24</div>
           </div>
-          <div class="glass" style="padding:12px;border-radius:var(--radius-md);text-align:center;">
-            <div style="font-size:0.8rem;color:var(--text-muted);">حالات حرجة</div>
-            <div style="font-size:1.6rem;font-weight:700;color:var(--danger);">3</div>
+          <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
+            <div class="text-soft" style="font-size:0.8rem;">حالات حرجة</div>
+            <div style="font-size:1.5rem;font-weight:700;color:var(--danger);">3</div>
           </div>
-          <div class="glass" style="padding:12px;border-radius:var(--radius-md);text-align:center;">
-            <div style="font-size:0.8rem;color:var(--text-muted);">زيارات افتراضية</div>
-            <div style="font-size:1.6rem;font-weight:700;">5</div>
+          <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
+            <div class="text-soft" style="font-size:0.8rem;">زيارات افتراضية</div>
+            <div style="font-size:1.5rem;font-weight:700;">5</div>
           </div>
         </div>
 
-        <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+        <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
           <strong>مسار الطوارئ</strong><br>
-          <span class="text-muted">تفعيل بروتوكول الطوارئ المدرسي خلال أقل من 3 دقائق من البلاغ.</span>
-          <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="text-soft">
+            تفعيل بروتوكول الطوارئ المدرسي خلال أقل من 3 دقائق من البلاغ.
+          </span>
+          <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
             <span class="badge badge-critical">تقييم</span>
             <span class="badge badge-warning">عزل</span>
             <span class="badge badge-normal">إخطار ولي الأمر</span>
@@ -128,9 +110,9 @@
           </div>
         </div>
 
-        <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+        <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
           <strong>الذكاء الاصطناعي في المنصة</strong><br>
-          <span class="text-muted">
+          <span class="text-soft">
             تحليل الأعراض والفايتلز، اقتراح مستوى الخطورة، دعم قرار الطبيب، وتغذية لوحة الإدارة بمؤشرات صحية.
           </span>
         </div>
@@ -138,12 +120,13 @@
 
     </main>
 
-    <footer style="padding:12px 24px;font-size:0.8rem;color:var(--text-muted);text-align:left;">
+    <footer style="font-size:0.8rem;" class="text-soft">
       نسخة تجريبية – نموذج أولي قابل للتوسع والربط مع أنظمة الوزارة.
     </footer>
 
   </div>
 
+  <script src="assets/js/theme.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>
