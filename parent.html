@@ -3,134 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>واجهة ولي الأمر – العيادة المدرسية الذكية</title>
 
-  <title>ولي الأمر – العيادة المدرسية الذكية</title>
-
-  <!-- أيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-
-  <!-- الثيم العام -->
-  <link rel="stylesheet" href="assets/css/global.css" />
-
-  <!-- ستايل خاص بواجهة ولي الأمر -->
-  <link rel="stylesheet" href="assets/css/parent.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body>
-  <div class="app-shell fade-in">
+<body data-page="parent">
+  <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:16px;">
 
-    <!-- الهيدر -->
-    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
-      <div class="brand" style="display:flex;align-items:center;gap:14px;">
-        <div class="brand-mark" style="
-          width:48px;height:48px;border-radius:14px;
-          background:linear-gradient(135deg,#7b5cff,#a08cff);
-          display:flex;align-items:center;justify-content:center;
-          font-weight:700;font-size:1.1rem;">
-          SC
-        </div>
-        <div class="brand-text">
-          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">واجهة ولي الأمر</div>
-          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
-            متابعة الحالة الصحية للطالب
+    <header class="app-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-mark">PR</div>
+        <div>
+          <div style="font-weight:600;">واجهة ولي الأمر</div>
+          <div class="text-soft" style="font-size:0.8rem;">
+            متابعة حالة الابن الصحية والتنبيهات والزيارات
           </div>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button id="theme-toggle" class="icon-btn">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="icon-btn" id="theme-toggle">
           <span class="material-symbols-rounded">brightness_6</span>
         </button>
-
         <button class="icon-btn danger" onclick="home()">
           <span class="material-symbols-rounded">logout</span>
         </button>
       </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="fade-in" style="display:flex;flex-direction:column;gap:20px;">
+    <main style="flex:1;display:grid;grid-template-columns:2fr 1.2fr;gap:14px;">
 
-      <!-- بطاقة بيانات الطالب -->
-      <section class="glass card" style="padding:20px;">
-        <h2>بيانات الطالب</h2>
-        <p>الاسم: <strong>محمد عبدالعزيز الربيعي</strong></p>
-        <p>العمر: <strong>10 سنوات</strong></p>
-        <p>الصف: <strong>الخامس الابتدائي</strong></p>
-        <p>الحالة الصحية الحالية: <span class="badge badge-normal">مستقرة</span></p>
-      </section>
+      <section class="glass card" style="display:flex;flex-direction:column;gap:10px;">
+        <h2 style="font-size:1rem;">حالة الابن الصحية</h2>
+        <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.9rem;">
+          <strong>محمد عبدالعزيز</strong><br>
+          <span class="text-soft">الصف الخامس – حالة مستقرة</span><br>
+          <span class="text-soft">آخر زيارة: قبل أسبوع – صداع بسيط</span>
+        </div>
 
-      <!-- السجل الطبي -->
-      <section class="glass card" style="padding:20px;">
-        <h2>السجل الطبي</h2>
-
-        <div class="table-wrapper" style="margin-top:10px;">
-          <table>
-            <thead>
-              <tr>
-                <th>التاريخ</th>
-                <th>السبب</th>
-                <th>الإجراء</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2025-12-10</td>
-                <td>ارتفاع حرارة</td>
-                <td>فحص + خافض حرارة</td>
-              </tr>
-              <tr>
-                <td>2025-11-02</td>
-                <td>صداع</td>
-                <td>راحة + ماء</td>
-              </tr>
-            </tbody>
-          </table>
+        <h3 style="font-size:0.9rem;margin-top:8px;">آخر توصية</h3>
+        <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
+          <strong>توصية AI:</strong><br>
+          الراحة في المنزل، شرب السوائل، المتابعة إذا استمرت الأعراض أكثر من 24 ساعة.
         </div>
       </section>
 
-      <!-- التنبيهات -->
-      <section class="glass card" style="padding:20px;">
-        <h2>التنبيهات الصحية</h2>
+      <section style="display:flex;flex-direction:column;gap:10px;">
 
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
-          <div class="alert-item glass" style="padding:12px;border-radius:var(--radius-md);">
-            <strong>تنبيه:</strong> موعد التطعيم القادم بتاريخ 2026-03-15
-          </div>
-
-          <div class="alert-item glass" style="padding:12px;border-radius:var(--radius-md);">
-            <strong>تنبيه:</strong> تمت مراجعة حالة الطالب يوم أمس
+        <div class="glass card">
+          <h2 style="font-size:1rem;margin-bottom:6px;">تنبيهات</h2>
+          <div class="glass" style="padding:8px;border-radius:var(--radius-md);font-size:0.85rem;">
+            لا توجد تنبيهات حرجة حاليًا.
           </div>
         </div>
-      </section>
 
-      <!-- إجراءات ولي الأمر -->
-      <section class="glass card" style="padding:20px;">
-        <h2>إجراءات سريعة</h2>
-
-        <div style="display:flex;gap:10px;margin-top:12px;">
-          <button class="primary-btn" onclick="go('student-profile.html')">
-            عرض ملف الطالب
+        <div class="glass card">
+          <h2 style="font-size:1rem;margin-bottom:6px;">إجراءات</h2>
+          <button class="primary-btn" style="margin-bottom:6px;" onclick="go('student-self-report.html')">
+            إدخال أعراض من قبل الطالب
           </button>
-
-          <button class="primary-btn" onclick="alert('تم إرسال طلب الخروج للعيادة')">
+          <button class="primary-btn" style="margin-bottom:6px;" onclick="go('video-call.html')">
+            طلب زيارة افتراضية
+          </button>
+          <button class="primary-btn danger" onclick="alert('طلب خروج (محاكاة)')">
             طلب خروج الطالب
           </button>
-
-          <button class="primary-btn" onclick="go('nurse-dashboard.html')">
-            التواصل مع العيادة
-          </button>
         </div>
+
       </section>
 
     </main>
 
   </div>
 
-  <!-- ملفات JS -->
   <script src="assets/js/theme.js"></script>
-  <script src="assets/js/router.js"></script>
-  <script src="assets/js/parent.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
