@@ -1,12 +1,8 @@
 /* ============================================================
    SMART SCHOOL CLINIC — UNIFIED JS FILE
-   Organized by modules (Dashboard, Parent, Admin, Doctor, Case...)
-   ============================================================ */
-
-
-/* ============================================================
-   GLOBAL HELPERS
 ============================================================ */
+
+/* GLOBAL HELPERS */
 
 function go(page) {
   window.location.href = page;
@@ -20,10 +16,7 @@ function home() {
   window.location.href = "index.html";
 }
 
-
-/* ============================================================
-   DASHBOARD MODULE (nurse-dashboard.html)
-============================================================ */
+/* DASHBOARD MODULE (nurse-dashboard.html) */
 
 const dashboard = {
   init() {
@@ -74,10 +67,7 @@ const dashboard = {
   }
 };
 
-
-/* ============================================================
-   PARENT MODULE (parent.html)
-============================================================ */
+/* PARENT MODULE (parent.html) */
 
 const parentPortal = {
   init() {
@@ -85,10 +75,7 @@ const parentPortal = {
   }
 };
 
-
-/* ============================================================
-   ADMIN MODULE (admin.html)
-============================================================ */
+/* ADMIN MODULE (admin.html) */
 
 const adminPanel = {
   init() {
@@ -96,10 +83,7 @@ const adminPanel = {
   }
 };
 
-
-/* ============================================================
-   DOCTOR MODULE (doctor.html)
-============================================================ */
+/* DOCTOR MODULE (doctor.html) */
 
 const doctorPanel = {
   init() {
@@ -107,10 +91,7 @@ const doctorPanel = {
   }
 };
 
-
-/* ============================================================
-   CASE DETAILS MODULE (case-details.html)
-============================================================ */
+/* CASE DETAILS MODULE (case-details.html) */
 
 const caseDetails = {
   init() {
@@ -127,10 +108,7 @@ const caseDetails = {
   }
 };
 
-
-/* ============================================================
-   STUDENT PROFILE MODULE (student-profile.html)
-============================================================ */
+/* STUDENT PROFILE MODULE (student-profile.html) */
 
 const studentProfile = {
   init() {
@@ -138,10 +116,7 @@ const studentProfile = {
   }
 };
 
-
-/* ============================================================
-   EMERGENCY MODULE (emergency-flow.html)
-============================================================ */
+/* EMERGENCY MODULE (emergency-flow.html) */
 
 const emergencyFlow = {
   init() {
@@ -149,10 +124,7 @@ const emergencyFlow = {
   }
 };
 
-
-/* ============================================================
-   STUDENT SELF-REPORT MODULE (student-self-report.html)
-============================================================ */
+/* STUDENT SELF-REPORT MODULE (student-self-report.html) */
 
 const studentSelfReport = {
   init() {
@@ -170,8 +142,7 @@ const studentSelfReport = {
     let result = "";
     let risk = "normal";
 
-    // تحليل الأعراض
-    if (symptoms.includes("ضيق تنفس") || symptoms.includes("حرارة") && temp >= 39) {
+    if (symptoms.includes("ضيق تنفس") || (symptoms.includes("حرارة") && temp >= 39)) {
       risk = "critical";
       result += "⚠ الحالة حرجة. يجب التوجه للعيادة فورًا.<br>";
     }
@@ -182,12 +153,12 @@ const studentSelfReport = {
     }
 
     if (pulse && pulse > 120) {
-      risk = "watch";
+      if (risk !== "critical") risk = "watch";
       result += "⚠ نبض مرتفع يحتاج متابعة.<br>";
     }
 
-    if (risk === "normal") {
-      result = "✔ الحالة مستقرة. يُنصح بالراحة وشرب الماء.";
+    if (!result) {
+      result = "✔ الحالة تبدو مستقرة. يُنصح بالراحة وشرب الماء، والمتابعة إذا استمرت الأعراض.";
     }
 
     document.getElementById("ai-result").innerHTML = `
@@ -199,15 +170,32 @@ const studentSelfReport = {
   },
 
   startVirtualVisit() {
-    alert("سيتم فتح غرفة زيارة افتراضية (صوت + صورة)");
     go("video-call.html");
   }
 };
 
+/* VIDEO CALL MODULE (video-call.html) */
 
-/* ============================================================
-   PAGE AUTO-INIT
-============================================================ */
+const videoCall = {
+  init() {
+    console.log("Video call page loaded");
+  },
+
+  toggleMic() {
+    alert("تبديل حالة المايك (محاكاة)");
+  },
+
+  toggleCam() {
+    alert("تبديل حالة الكاميرا (محاكاة)");
+  },
+
+  endCall() {
+    alert("تم إنهاء الزيارة الافتراضية");
+    back();
+  }
+};
+
+/* PAGE AUTO-INIT */
 
 document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page;
@@ -221,6 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
     case "student": studentProfile.init(); break;
     case "emergency": emergencyFlow.init(); break;
     case "student-self": studentSelfReport.init(); break;
-
+    case "video-call": videoCall.init(); break;
   }
 });
