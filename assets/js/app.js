@@ -1,9 +1,8 @@
 /* ============================================================
-   SMART SCHOOL CLINIC — UNIFIED JS FILE
+   SMART SCHOOL CLINIC — APP CORE
 ============================================================ */
 
-/* GLOBAL HELPERS */
-
+/* ---------- Navigation Helpers ---------- */
 function go(page) {
   window.location.href = page;
 }
@@ -16,10 +15,53 @@ function home() {
   window.location.href = "index.html";
 }
 
-/* DASHBOARD MODULE (nurse-dashboard.html) */
+/* ---------- THEME TOGGLE (with theme.js hook) ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("theme-toggle");
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      if (window.themeManager) {
+        window.themeManager.toggleTheme();
+      }
+    });
+  }
 
-const dashboard = {
+  routerInit();
+});
+
+/* ---------- ROUTER INIT (page-based) ---------- */
+function routerInit() {
+  const page = document.body.dataset.page;
+
+  switch (page) {
+    case "landing": landing.init(); break;
+    case "nurse-dashboard": nurseDashboard.init(); break;
+    case "doctor": doctorPanel.init(); break;
+    case "admin": adminPanel.init(); break;
+    case "parent": parentPortal.init(); break;
+    case "student": studentProfile.init(); break;
+    case "student-self": studentSelfReport.init(); break;
+    case "case-details": caseDetails.init(); break;
+    case "emergency": emergencyFlow.init(); break;
+    case "video-call": videoCall.init(); break;
+  }
+}
+
+/* ============================================================
+   LANDING MODULE
+============================================================ */
+const landing = {
   init() {
+    console.log("Landing loaded");
+  }
+};
+
+/* ============================================================
+   NURSE DASHBOARD MODULE
+============================================================ */
+const nurseDashboard = {
+  init() {
+    console.log("Nurse dashboard loaded");
     this.loadCases();
     this.loadAlerts();
   },
@@ -29,22 +71,21 @@ const dashboard = {
     if (!tbody) return;
 
     const sample = [
-      { name: "أحمد خالد", age: 10, risk: "critical", time: "10:32" },
-      { name: "سارة محمد", age: 11, risk: "normal", time: "09:15" },
-      { name: "عبدالله ناصر", age: 9, risk: "watch", time: "08:50" }
+      { name: "أحمد خالد", grade: "الخامس", risk: "critical", time: "10:32" },
+      { name: "سارة محمد", grade: "الرابع", risk: "watch", time: "09:15" },
+      { name: "عبدالله ناصر", grade: "السادس", risk: "normal", time: "08:50" }
     ];
 
     tbody.innerHTML = sample.map(c => `
       <tr onclick="go('case-details.html')">
         <td>${c.name}</td>
-        <td>${c.age}</td>
+        <td>${c.grade}</td>
         <td>
-          <span class="badge badge-${c.risk}">
-            ${c.risk === "critical" ? "حرجة" : c.risk === "watch" ? "متوسطة" : "طبيعية"}
+          <span class="badge ${this.riskClass(c.risk)}">
+            ${this.riskLabel(c.risk)}
           </span>
         </td>
         <td>${c.time}</td>
-        <td><button class="primary-btn">عرض</button></td>
       </tr>
     `).join("");
   },
@@ -60,80 +101,180 @@ const dashboard = {
     ];
 
     list.innerHTML = alerts.map(a => `
-      <div class="alert-item glass" style="padding:12px;border-radius:var(--radius-md);">
+      <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
         ${a}
       </div>
     `).join("");
+  },
+
+  riskClass(risk) {
+    if (risk === "critical") return "badge-critical";
+    if (risk === "watch") return "badge-warning";
+    return "badge-normal";
+  },
+
+  riskLabel(risk) {
+    if (risk === "critical") return "حرجة";
+    if (risk === "watch") return "متوسطة";
+    return "طبيعية";
   }
 };
 
-/* PARENT MODULE (parent.html) */
-
-const parentPortal = {
+/* ============================================================
+   DOCTOR MODULE
+============================================================ */
+const doctorPanel = {
   init() {
-    console.log("Parent portal loaded");
+    console.log("Doctor panel loaded");
+    this.loadCases();
+  },
+
+  loadCases() {
+    const container = document.getElementById("doctor-cases");
+    if (!container) return;
+
+    const cases = [
+      {
+        id: 101,
+        student: "أحمد خالد",
+        grade: "الخامس",
+        risk: "critical",
+        reason: "حرارة + ضيق تنفس",
+        time: "10:32"
+      },
+      {
+        id: 102,
+        student: "سارة محمد",
+        grade: "السادس",
+        risk: "watch",
+        reason: "صداع متكرر",
+        time: "09:15"
+      },
+      {
+        id: 103,
+        student: "عبدالله ناصر",
+        grade: "الرابع",
+        risk: "normal",
+        reason: "ألم بطن بسيط",
+        time: "08:50"
+      }
+    ];
+
+    container.innerHTML = cases.map(c => `
+      <div class="glass" style="padding:10px;border-radius:var(--radius-md);display:flex;justify-content:space-between;align-items:center;cursor:pointer;"
+           onclick="doctorPanel.selectCase(${c.id})">
+        <div>
+          <strong>${c.student}</strong>
+          <div class="text-soft" style="font-size:0.8rem;">${c.grade} – ${c.reason}</div>
+        </div>
+        <div style="text-align:right;">
+          <span class="badge ${nurseDashboard.riskClass(c.risk)}">${nurseDashboard.riskLabel(c.risk)}</span><br>
+          <span class="text-soft" style="font-size:0.75rem;">${c.time}</span>
+        </div>
+      </div>
+    `).join("");
+
+    this._cases = cases;
+  },
+
+  selectCase(id) {
+    const c = (this._cases || []).find(x => x.id === id);
+    if (!c) return;
+
+    const summary = document.getElementById("case-summary");
+    const vitals = document.getElementById("case-vitals");
+    const aiAssist = document.getElementById("ai-assist");
+    const snapshot = document.getElementById("patient-snapshot");
+
+    if (summary) {
+      summary.innerHTML = `
+        <strong>${c.student}</strong><br>
+        <span class="text-soft">الصف: ${c.grade}</span><br>
+        <span class="text-soft">سبب الزيارة: ${c.reason}</span>
+      `;
+    }
+
+    if (vitals) {
+      vitals.innerHTML = `
+        <div>الحرارة<br><strong>38.9 °C</strong></div>
+        <div>النبض<br><strong>112 bpm</strong></div>
+        <div>الأكسجين<br><strong>94%</strong></div>
+        <div>الضغط<br><strong>110/70</strong></div>
+      `;
+    }
+
+    if (aiAssist) {
+      aiAssist.innerHTML = `
+        <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
+          <strong>تحليل AI:</strong><br>
+          الحالة مصنفة كـ <span style="color:var(--danger);font-weight:600;">متوسطة إلى حرجة</span> بناءً على:
+          <ul style="margin:6px 16px;">
+            <li>ارتفاع الحرارة</li>
+            <li>زيادة النبض</li>
+            <li>انخفاض نسبي في الأكسجين</li>
+          </ul>
+          التوصية: تقييم مباشر من الطبيب خلال 10 دقائق، مع متابعة المؤشرات الحيوية كل 15 دقيقة.
+        </div>
+      `;
+    }
+
+    if (snapshot) {
+      snapshot.innerHTML = `
+        <strong>${c.student}</strong><br>
+        <span class="text-soft">لا توجد حساسية معروفة</span><br>
+        <span class="text-soft">لا توجد أمراض مزمنة مسجلة</span><br>
+        <span class="text-soft">آخر زيارة: قبل شهرين – صداع بسيط</span>
+      `;
+    }
+  },
+
+  saveDiagnosis() {
+    const text = document.getElementById("doctor-diagnosis");
+    if (!text || !text.value.trim()) {
+      alert("الرجاء إدخال التشخيص");
+      return;
+    }
+    alert("تم حفظ التشخيص (محاكاة)");
   }
 };
 
-/* ADMIN MODULE (admin.html) */
-
+/* ============================================================
+   ADMIN MODULE
+============================================================ */
 const adminPanel = {
   init() {
     console.log("Admin panel loaded");
   }
 };
 
-/* DOCTOR MODULE (doctor.html) */
-
-const doctorPanel = {
+/* ============================================================
+   PARENT MODULE
+============================================================ */
+const parentPortal = {
   init() {
-    console.log("Doctor panel loaded");
+    console.log("Parent portal loaded");
   }
 };
 
-/* CASE DETAILS MODULE (case-details.html) */
-
-const caseDetails = {
-  init() {
-    console.log("Case details loaded");
-  },
-
-  saveDiagnosis() {
-    const text = document.getElementById("diagnosis").value;
-    if (!text.trim()) {
-      alert("الرجاء إدخال التشخيص");
-      return;
-    }
-    alert("تم حفظ التشخيص بنجاح");
-  }
-};
-
-/* STUDENT PROFILE MODULE (student-profile.html) */
-
+/* ============================================================
+   STUDENT PROFILE MODULE
+============================================================ */
 const studentProfile = {
   init() {
     console.log("Student profile loaded");
   }
 };
 
-/* EMERGENCY MODULE (emergency-flow.html) */
-
-const emergencyFlow = {
-  init() {
-    console.log("Emergency flow loaded");
-  }
-};
-
-/* STUDENT SELF-REPORT MODULE (student-self-report.html) */
-
+/* ============================================================
+   STUDENT SELF-REPORT MODULE
+============================================================ */
 const studentSelfReport = {
   init() {
-    console.log("Student Self-Report Page Loaded");
+    console.log("Student self-report loaded");
   },
 
   analyzeSymptoms() {
     const symptoms = [...document.querySelectorAll(".symptom input:checked")].map(i => i.value);
-
     const temp = parseFloat(document.getElementById("temp").value);
     const pulse = parseFloat(document.getElementById("pulse").value);
     const oxygen = parseFloat(document.getElementById("oxygen").value);
@@ -161,12 +302,15 @@ const studentSelfReport = {
       result = "✔ الحالة تبدو مستقرة. يُنصح بالراحة وشرب الماء، والمتابعة إذا استمرت الأعراض.";
     }
 
-    document.getElementById("ai-result").innerHTML = `
-      <div class="glass" style="padding:14px;border-radius:var(--radius-md);margin-top:10px;">
-        <strong>توصية الذكاء الاصطناعي:</strong><br>
-        ${result}
-      </div>
-    `;
+    const box = document.getElementById("ai-result");
+    if (box) {
+      box.innerHTML = `
+        <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+          <strong>توصية الذكاء الاصطناعي:</strong><br>
+          ${result}
+        </div>
+      `;
+    }
   },
 
   startVirtualVisit() {
@@ -174,11 +318,39 @@ const studentSelfReport = {
   }
 };
 
-/* VIDEO CALL MODULE (video-call.html) */
+/* ============================================================
+   CASE DETAILS MODULE
+============================================================ */
+const caseDetails = {
+  init() {
+    console.log("Case details loaded");
+  },
 
+  saveDiagnosis() {
+    const text = document.getElementById("diagnosis");
+    if (!text || !text.value.trim()) {
+      alert("الرجاء إدخال الملاحظات");
+      return;
+    }
+    alert("تم حفظ الملاحظات (محاكاة)");
+  }
+};
+
+/* ============================================================
+   EMERGENCY FLOW MODULE
+============================================================ */
+const emergencyFlow = {
+  init() {
+    console.log("Emergency flow loaded");
+  }
+};
+
+/* ============================================================
+   VIDEO CALL MODULE
+============================================================ */
 const videoCall = {
   init() {
-    console.log("Video call page loaded");
+    console.log("Video call loaded");
   },
 
   toggleMic() {
@@ -194,21 +366,3 @@ const videoCall = {
     back();
   }
 };
-
-/* PAGE AUTO-INIT */
-
-document.addEventListener("DOMContentLoaded", () => {
-  const page = document.body.dataset.page;
-
-  switch (page) {
-    case "dashboard": dashboard.init(); break;
-    case "parent": parentPortal.init(); break;
-    case "admin": adminPanel.init(); break;
-    case "doctor": doctorPanel.init(); break;
-    case "case": caseDetails.init(); break;
-    case "student": studentProfile.init(); break;
-    case "emergency": emergencyFlow.init(); break;
-    case "student-self": studentSelfReport.init(); break;
-    case "video-call": videoCall.init(); break;
-  }
-});
