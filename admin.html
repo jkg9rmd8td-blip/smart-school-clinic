@@ -1,17 +1,151 @@
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/workflow.js"></script>
-<script>guard(['admin'])</script>
-<link rel="stylesheet" href="assets/css/apple.css"/>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="container">
-<h1>🏫 لوحة الإدارة</h1>
+  <title>لوحة المدير – العيادة المدرسية الذكية</title>
 
-<div class="card" id="aBox"></div>
+  <!-- أيقونات -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 
-<script>
-const c = getCase();
-aBox.innerHTML = c
-  ? `<p>حالة نشطة — الحالة الحالية: <b>${c.status}</b></p>`
-  : `<p>لا توجد حالات اليوم</p>`;
-</script>
-</div>
+  <!-- الثيم العام -->
+  <link rel="stylesheet" href="assets/css/global.css" />
+
+  <!-- ستايل لوحة المدير -->
+  <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+
+<body>
+  <div class="app-shell fade-in">
+
+    <!-- الهيدر -->
+    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
+      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+        <div class="brand-mark" style="
+          width:48px;height:48px;border-radius:14px;
+          background:linear-gradient(135deg,#7b5cff,#a08cff);
+          display:flex;align-items:center;justify-content:center;
+          font-weight:700;font-size:1.1rem;">
+          SC
+        </div>
+        <div class="brand-text">
+          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">لوحة المدير</div>
+          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
+            إدارة النظام – العيادة المدرسية الذكية
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button id="theme-toggle" class="icon-btn">
+          <span class="material-symbols-rounded">brightness_6</span>
+        </button>
+
+        <button class="icon-btn danger" onclick="home()">
+          <span class="material-symbols-rounded">logout</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="fade-in" style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- الصف الأول: الإحصائيات -->
+      <section style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+        <div class="glass card stat-card">
+          <h3>عدد الحالات اليوم</h3>
+          <div class="stat-number">42</div>
+        </div>
+
+        <div class="glass card stat-card">
+          <h3>الحالات الحرجة</h3>
+          <div class="stat-number" style="color:var(--danger);">3</div>
+        </div>
+
+        <div class="glass card stat-card">
+          <h3>عدد الطلاب</h3>
+          <div class="stat-number">512</div>
+        </div>
+
+        <div class="glass card stat-card">
+          <h3>عدد المستخدمين</h3>
+          <div class="stat-number">14</div>
+        </div>
+      </section>
+
+      <!-- الصف الثاني: إدارة النظام -->
+      <section class="glass card" style="padding:20px;">
+        <h2>إدارة النظام</h2>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px;">
+
+          <div class="glass admin-tile" onclick="go('nurse-dashboard.html')" style="cursor:pointer;padding:16px;">
+            <span class="material-symbols-rounded" style="font-size:32px;">monitor_heart</span>
+            <h3>لوحة التمريض</h3>
+            <p>عرض الحالات اليومية والتنبيهات.</p>
+          </div>
+
+          <div class="glass admin-tile" onclick="go('doctor.html')" style="cursor:pointer;padding:16px;">
+            <span class="material-symbols-rounded" style="font-size:32px;">stethoscope</span>
+            <h3>لوحة الطبيب</h3>
+            <p>تشخيص الحالات ومراجعة المؤشرات الحيوية.</p>
+          </div>
+
+          <div class="glass admin-tile" onclick="go('parent.html')" style="cursor:pointer;padding:16px;">
+            <span class="material-symbols-rounded" style="font-size:32px;">family_restroom</span>
+            <h3>واجهة ولي الأمر</h3>
+            <p>متابعة حالة الطالب الصحية.</p>
+          </div>
+
+          <div class="glass admin-tile" onclick="go('student-profile.html')" style="cursor:pointer;padding:16px;">
+            <span class="material-symbols-rounded" style="font-size:32px;">person_search</span>
+            <h3>إدارة الطلاب</h3>
+            <p>عرض وتحديث بيانات الطلاب.</p>
+          </div>
+
+          <div class="glass admin-tile" onclick="go('case-details.html')" style="cursor:pointer;padding:16px;">
+            <span class="material-symbols-rounded" style="font-size:32px;">add_notes</span>
+            <h3>إضافة حالة</h3>
+            <p>تسجيل حالة جديدة في النظام.</p>
+          </div>
+
+          <div class="glass admin-tile" onclick="go('emergency-flow.html')" style="cursor:pointer;padding:16px;">
+            <span class="material-symbols-rounded" style="font-size:32px;">emergency</span>
+            <h3>مسار الطوارئ</h3>
+            <p>إدارة الحالات الحرجة.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- الصف الثالث: التقارير -->
+      <section class="glass card" style="padding:20px;">
+        <h2>التقارير</h2>
+
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="primary-btn" onclick="alert('تم إنشاء تقرير يومي')">
+            تقرير يومي
+          </button>
+
+          <button class="primary-btn" onclick="alert('تم إنشاء تقرير أسبوعي')">
+            تقرير أسبوعي
+          </button>
+
+          <button class="primary-btn" onclick="alert('تم إنشاء تقرير شهري')">
+            تقرير شهري
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ملفات JS -->
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/admin.js"></script>
+
+</body>
+</html>
