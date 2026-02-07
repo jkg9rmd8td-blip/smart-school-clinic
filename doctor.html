@@ -12,20 +12,13 @@
 <body data-page="doctor">
   <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:18px;">
 
-    <!-- AppBar -->
-    <header class="app-header glass" style="padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+    <header class="app-header">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="brand-mark" style="
-          width:40px;height:40px;border-radius:14px;
-          background:linear-gradient(135deg,#4f8cff,#7b5cff);
-          display:flex;align-items:center;justify-content:center;
-          font-weight:700;font-size:1rem;">
-          DR
-        </div>
+        <div class="brand-mark">DR</div>
         <div>
           <div style="font-weight:600;">لوحة الطبيب</div>
-          <div style="font-size:0.8rem;color:var(--text-muted);">
-            تشخيص، متابعة، زيارات افتراضية، دعم بالذكاء الاصطناعي
+          <div class="text-soft" style="font-size:0.8rem;">
+            تشخيص، علاج، أدوية، إجازات، زيارات افتراضية
           </div>
         </div>
       </div>
@@ -40,29 +33,24 @@
       </div>
     </header>
 
-    <!-- Layout -->
     <main style="flex:1;display:grid;grid-template-columns:2.1fr 1.4fr;gap:16px;">
 
-      <!-- يسار: قائمة الحالات + تفاصيل الحالة -->
       <section style="display:flex;flex-direction:column;gap:12px;">
 
-        <!-- قائمة الحالات -->
         <div class="glass card" style="padding:14px;flex:1;display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2 style="font-size:1rem;">قائمة الحالات</h2>
             <span class="badge badge-normal">اليوم</span>
           </div>
-
           <div id="doctor-cases" style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
-            <!-- يتم تعبئتها من JS -->
+            <!-- من JS -->
           </div>
         </div>
 
-        <!-- تفاصيل الحالة المختارة -->
         <div class="glass card" style="padding:14px;flex:1.2;display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2 style="font-size:1rem;">تفاصيل الحالة</h2>
-            <button class="primary-btn" onclick="go('student-profile.html')">ملف الطالب</button>
+            <button class="primary-btn" onclick="go('student.html')">ملف الطالب</button>
           </div>
 
           <div id="case-summary" style="font-size:0.9rem;color:var(--text-main);">
@@ -72,38 +60,37 @@
           <div style="margin-top:8px;">
             <h3 style="font-size:0.9rem;margin-bottom:4px;">المؤشرات الحيوية</h3>
             <div id="case-vitals" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:0.85rem;">
-              <!-- تعبئة من JS -->
+              <!-- من JS -->
             </div>
           </div>
 
           <div style="margin-top:8px;">
             <h3 style="font-size:0.9rem;margin-bottom:4px;">التشخيص الطبي</h3>
-            <textarea id="doctor-diagnosis" placeholder="أدخل التشخيص الطبي هنا..."
-              style="width:100%;height:80px;border-radius:var(--radius-md);padding:8px;background:var(--bg-card);color:var(--text-main);border:none;outline:none;"></textarea>
-            <div style="margin-top:6px;display:flex;gap:8px;">
+            <textarea id="doctor-diagnosis" class="glass-input" style="height:80px;" placeholder="أدخل التشخيص الطبي هنا..."></textarea>
+            <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap;">
               <button class="primary-btn" onclick="doctorPanel.saveDiagnosis()">حفظ التشخيص</button>
               <button class="primary-btn danger" onclick="go('emergency-flow.html')">تحويل لمسار الطوارئ</button>
+              <button class="primary-btn" onclick="doctorPanel.issueLeave()">إصدار إجازة مرضية</button>
+              <button class="primary-btn" onclick="doctorPanel.prescribeMedication()">وصف دواء</button>
+              <button class="primary-btn" onclick="doctorPanel.sendReport()">إرسال تقرير</button>
             </div>
           </div>
         </div>
 
       </section>
 
-      <!-- يمين: AI + زيارة افتراضية + Snapshot -->
       <section style="display:flex;flex-direction:column;gap:12px;">
 
-        <!-- AI Assist -->
         <div class="glass card" style="padding:14px;">
           <h2 style="font-size:1rem;margin-bottom:6px;">مساعد الذكاء الاصطناعي</h2>
           <div id="ai-assist" style="font-size:0.9rem;color:var(--text-main);">
-            اختر حالة ليتم تحليل الأعراض والفايتلز واقتراح مستوى الخطورة.
+            اختر حالة ليتم تحليل الأعراض والفايتلز واقتراح مستوى الخطورة وخطة مبدئية.
           </div>
         </div>
 
-        <!-- زيارة افتراضية -->
         <div class="glass card" style="padding:14px;">
           <h2 style="font-size:1rem;margin-bottom:6px;">زيارة افتراضية</h2>
-          <p style="font-size:0.85rem;color:var(--text-muted);">
+          <p style="font-size:0.85rem;" class="text-soft">
             يمكن للطبيب بدء زيارة افتراضية مع الطالب وولي الأمر في نفس الجلسة.
           </p>
           <button class="primary-btn" style="margin-top:8px;" onclick="go('video-call.html')">
@@ -111,7 +98,6 @@
           </button>
         </div>
 
-        <!-- Snapshot -->
         <div class="glass card" style="padding:14px;flex:1;">
           <h2 style="font-size:1rem;margin-bottom:6px;">ملخص الطالب</h2>
           <div id="patient-snapshot" style="font-size:0.9rem;color:var(--text-main);">
@@ -126,7 +112,6 @@
   </div>
 
   <script src="assets/js/theme.js"></script>
-<script src="assets/js/app.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
