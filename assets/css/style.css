@@ -2,7 +2,7 @@
    SMART SCHOOL CLINIC — PREMIUM CINEMATIC DESIGN SYSTEM
 ============================================================ */
 
-/* ---------- Design Tokens ---------- */
+/* ---------- Design Tokens (Dark) ---------- */
 :root {
   --bg-main: #05050a;
   --bg-elevated: #0d0d16;
@@ -37,6 +37,30 @@
   --border-subtle: 1px solid rgba(255,255,255,0.06);
 }
 
+/* ---------- Light Theme Overrides ---------- */
+html[data-theme="light"] {
+  --bg-main: #f5f7fb;
+  --bg-elevated: #ffffff;
+  --bg-card: rgba(0, 0, 0, 0.02);
+  --bg-glass: rgba(255, 255, 255, 0.9);
+  --bg-glass-strong: rgba(0, 0, 0, 0.06);
+
+  --text-main: #111322;
+  --text-muted: #5b5f7a;
+  --text-soft: #8a8fad;
+
+  --accent: #5b4bff;
+  --accent-soft: #7b6cff;
+  --accent-alt: #2f7bff;
+
+  --danger: #e53955;
+  --warning: #f39c3d;
+  --success: #2ecc71;
+  --info: #1e88e5;
+
+  --border-subtle: 1px solid rgba(0,0,0,0.06);
+}
+
 /* ---------- Reset ---------- */
 * {
   margin: 0;
@@ -56,6 +80,10 @@ body {
   overflow-x: hidden;
 }
 
+html[data-theme="light"] body {
+  background: linear-gradient(180deg, #f5f7fb, #e6e9f5);
+}
+
 /* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar {
   width: 8px;
@@ -64,14 +92,13 @@ body {
   background: rgba(255,255,255,0.12);
   border-radius: 999px;
 }
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.18);
+}
 
 /* ---------- Typography Helpers ---------- */
-.text-muted {
-  color: var(--text-muted);
-}
-.text-soft {
-  color: var(--text-soft);
-}
+.text-muted { color: var(--text-muted); }
+.text-soft { color: var(--text-soft); }
 
 /* ---------- Layout Shell ---------- */
 .app-shell {
@@ -105,6 +132,9 @@ body {
   padding: 14px 18px;
   box-shadow: var(--shadow-soft);
 }
+html[data-theme="light"] .app-header {
+  background: linear-gradient(135deg, rgba(91,75,255,0.08), #ffffff);
+}
 
 /* ---------- Brand ---------- */
 .brand-mark {
@@ -135,6 +165,9 @@ body {
   justify-content: center;
   gap: 6px;
   transition: var(--transition);
+}
+html[data-theme="light"] .primary-btn {
+  color: #fff;
 }
 
 .primary-btn:hover {
@@ -209,6 +242,9 @@ table {
 thead {
   background: rgba(255,255,255,0.06);
 }
+html[data-theme="light"] thead {
+  background: rgba(0,0,0,0.03);
+}
 
 th, td {
   padding: 9px;
@@ -221,6 +257,9 @@ tbody tr {
 
 tbody tr:hover {
   background: rgba(255,255,255,0.06);
+}
+html[data-theme="light"] tbody tr:hover {
+  background: rgba(0,0,0,0.03);
 }
 
 /* ---------- Inputs ---------- */
@@ -269,6 +308,9 @@ textarea.glass-input:focus {
 .symptom:hover {
   background: rgba(255,255,255,0.12);
 }
+html[data-theme="light"] .symptom:hover {
+  background: rgba(0,0,0,0.04);
+}
 
 /* ---------- Vitals Grid ---------- */
 .vitals-grid {
@@ -310,6 +352,9 @@ textarea.glass-input:focus {
   color: var(--text-soft);
   box-shadow: var(--shadow-soft);
 }
+html[data-theme="light"] .video-box {
+  background: radial-gradient(circle at top, rgba(91,75,255,0.08), #ffffff);
+}
 
 .video-box.self {
   min-height: 180px;
@@ -328,6 +373,42 @@ textarea.glass-input:focus {
   justify-content: center;
   gap: 10px;
   padding: 10px;
+}
+
+/* ---------- Tabs (Student) ---------- */
+.tabs {
+  display: flex;
+  border-bottom: var(--border-subtle);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.tab {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition-fast);
+}
+
+.tab.active {
+  color: var(--accent-soft);
+  border-bottom-color: var(--accent);
+  background: rgba(123,92,255,0.08);
+}
+html[data-theme="light"] .tab.active {
+  background: rgba(91,75,255,0.06);
+}
+
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
 }
 
 /* ---------- Animations ---------- */
