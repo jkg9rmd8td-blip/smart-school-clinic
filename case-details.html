@@ -56,7 +56,7 @@
       <section class="glass card" style="display:flex;flex-direction:column;gap:10px;">
         <h2 style="font-size:1rem;">ملاحظات التمريض / الطبيب</h2>
         <textarea id="diagnosis" class="glass-input" style="height:120px;" placeholder="أدخل الملاحظات والتشخيص هنا..."></textarea>
-        <div style="display:flex;gap:8px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <button class="primary-btn" onclick="caseDetails.saveDiagnosis()">حفظ</button>
           <button class="primary-btn danger" onclick="go('emergency-flow.html')">تحويل لمسار الطوارئ</button>
         </div>
