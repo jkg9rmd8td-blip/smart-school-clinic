@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ملف الطالب – العيادة المدرسية الذكية</title>
+  <title>واجهة الطالب – العيادة المدرسية الذكية</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -16,9 +16,9 @@
       <div style="display:flex;align-items:center;gap:10px;">
         <div class="brand-mark">ST</div>
         <div>
-          <div style="font-weight:600;">ملف الطالب</div>
+          <div style="font-weight:600;">واجهة الطالب</div>
           <div class="text-soft" style="font-size:0.8rem;">
-            نظرة شاملة على التاريخ الصحي المدرسي
+            إدخال الأعراض، السجل الصحي، الأدوية، الإجازات، الزيارات
           </div>
         </div>
       </div>
@@ -27,26 +27,77 @@
         <button class="icon-btn" id="theme-toggle">
           <span class="material-symbols-rounded">brightness_6</span>
         </button>
-        <button class="icon-btn danger" onclick="back()">
-          <span class="material-symbols-rounded">arrow_back</span>
+        <button class="icon-btn danger" onclick="home()">
+          <span class="material-symbols-rounded">logout</span>
         </button>
       </div>
     </header>
 
-    <main style="flex:1;display:grid;grid-template-columns:1.4fr 2fr;gap:14px;">
+    <main class="glass card" style="display:flex;flex-direction:column;gap:12px;">
 
-      <section class="glass card" style="display:flex;flex-direction:column;gap:10px;">
-        <h2 style="font-size:1rem;">بيانات الطالب</h2>
-        <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.9rem;">
-          <strong>محمد عبدالعزيز</strong><br>
-          <span class="text-soft">الصف الخامس – 10 سنوات</span><br>
-          <span class="text-soft">لا توجد حساسية معروفة</span><br>
-          <span class="text-soft">لا توجد أمراض مزمنة مسجلة</span>
+      <div class="tabs">
+        <button class="tab active" data-tab="symptoms">إدخال الأعراض</button>
+        <button class="tab" data-tab="history">السجل الصحي</button>
+        <button class="tab" data-tab="meds">الأدوية</button>
+        <button class="tab" data-tab="leaves">الإجازات</button>
+        <button class="tab" data-tab="visits">الزيارات الافتراضية</button>
+      </div>
+
+      <div class="tab-panel active" data-tab="symptoms">
+        <h2 style="font-size:1rem;margin-bottom:6px;">إدخال الأعراض والفايتلز</h2>
+        <p class="text-soft" style="font-size:0.85rem;">
+          اختر الأعراض وأدخل المؤشرات الحيوية، وسيقوم الذكاء الاصطناعي بتحليل الحالة وإعطائك توصية.
+        </p>
+
+        <h3 style="font-size:0.9rem;margin-top:8px;">الأعراض</h3>
+        <div class="symptom-grid">
+          <label class="symptom">
+            <input type="checkbox" value="حرارة"> <span>حرارة</span>
+          </label>
+          <label class="symptom">
+            <input type="checkbox" value="صداع"> <span>صداع</span>
+          </label>
+          <label class="symptom">
+            <input type="checkbox" value="ضيق تنفس"> <span>ضيق تنفس</span>
+          </label>
+          <label class="symptom">
+            <input type="checkbox" value="ألم بطن"> <span>ألم بطن</span>
+          </label>
+          <label class="symptom">
+            <input type="checkbox" value="سعال"> <span>سعال</span>
+          </label>
         </div>
-      </section>
 
-      <section class="glass card" style="display:flex;flex-direction:column;gap:10px;">
-        <h2 style="font-size:1rem;">سجل الحالات</h2>
+        <h3 style="font-size:0.9rem;margin-top:10px;">المؤشرات الحيوية</h3>
+        <div class="vitals-grid">
+          <div>
+            <span class="text-soft" style="font-size:0.8rem;">الحرارة (°C)</span>
+            <input id="temp" class="glass-input" type="number" step="0.1" placeholder="مثال: 37.5">
+          </div>
+          <div>
+            <span class="text-soft" style="font-size:0.8rem;">النبض (bpm)</span>
+            <input id="pulse" class="glass-input" type="number" placeholder="مثال: 90">
+          </div>
+          <div>
+            <span class="text-soft" style="font-size:0.8rem;">الأكسجين (%)</span>
+            <input id="oxygen" class="glass-input" type="number" placeholder="مثال: 98">
+          </div>
+          <div>
+            <span class="text-soft" style="font-size:0.8rem;">الضغط</span>
+            <input id="bp" class="glass-input" type="text" placeholder="مثال: 110/70">
+          </div>
+        </div>
+
+        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="primary-btn" onclick="studentPage.analyzeSymptoms()">تحليل AI</button>
+          <button class="primary-btn" onclick="studentPage.startVirtualVisit()">طلب زيارة افتراضية</button>
+        </div>
+
+        <div id="ai-result" style="margin-top:10px;"></div>
+      </div>
+
+      <div class="tab-panel" data-tab="history">
+        <h2 style="font-size:1rem;margin-bottom:6px;">السجل الصحي</h2>
         <div class="table-wrapper">
           <table>
             <thead>
@@ -73,7 +124,80 @@
             </tbody>
           </table>
         </div>
-      </section>
+      </div>
+
+      <div class="tab-panel" data-tab="meds">
+        <h2 style="font-size:1rem;margin-bottom:6px;">الأدوية الحالية</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>الدواء</th>
+                <th>الجرعة</th>
+                <th>المدة</th>
+                <th>الطبيب</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>باراسيتامول</td>
+                <td>5 مل كل 8 ساعات</td>
+                <td>3 أيام</td>
+                <td>د. أحمد</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab="leaves">
+        <h2 style="font-size:1rem;margin-bottom:6px;">الإجازات المرضية</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>المدة</th>
+                <th>الطبيب</th>
+                <th>الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025-01-11</td>
+                <td>يوم واحد</td>
+                <td>د. أحمد</td>
+                <td><span class="badge badge-success">منتهية</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab="visits">
+        <h2 style="font-size:1rem;margin-bottom:6px;">الزيارات الافتراضية</h2>
+        <button class="primary-btn" style="margin-bottom:8px;" onclick="studentPage.startVirtualVisit()">
+          بدء زيارة افتراضية جديدة
+        </button>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>الطبيب</th>
+                <th>الملخص</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025-01-05</td>
+                <td>د. خالد</td>
+                <td>صداع بسيط – توصية بالراحة وشرب الماء.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
     </main>
 
