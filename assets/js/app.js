@@ -6,30 +6,23 @@
 function go(page) {
   window.location.href = page;
 }
-
 function back() {
   window.history.back();
 }
-
 function home() {
   window.location.href = "index.html";
 }
 
-/* ---------- THEME TOGGLE (with theme.js hook) ---------- */
+/* ---------- DOM Ready ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("theme-toggle");
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      if (window.themeManager) {
-        window.themeManager.toggleTheme();
-      }
-    });
+  if (toggle && window.themeManager) {
+    toggle.addEventListener("click", () => window.themeManager.toggleTheme());
   }
-
   routerInit();
 });
 
-/* ---------- ROUTER INIT (page-based) ---------- */
+/* ---------- Router ---------- */
 function routerInit() {
   const page = document.body.dataset.page;
 
@@ -39,8 +32,7 @@ function routerInit() {
     case "doctor": doctorPanel.init(); break;
     case "admin": adminPanel.init(); break;
     case "parent": parentPortal.init(); break;
-    case "student": studentProfile.init(); break;
-    case "student-self": studentSelfReport.init(); break;
+    case "student": studentPage.init(); break;
     case "case-details": caseDetails.init(); break;
     case "emergency": emergencyFlow.init(); break;
     case "video-call": videoCall.init(); break;
@@ -48,7 +40,7 @@ function routerInit() {
 }
 
 /* ============================================================
-   LANDING MODULE
+   LANDING
 ============================================================ */
 const landing = {
   init() {
@@ -57,11 +49,10 @@ const landing = {
 };
 
 /* ============================================================
-   NURSE DASHBOARD MODULE
+   NURSE DASHBOARD
 ============================================================ */
 const nurseDashboard = {
   init() {
-    console.log("Nurse dashboard loaded");
     this.loadCases();
     this.loadAlerts();
   },
@@ -121,11 +112,10 @@ const nurseDashboard = {
 };
 
 /* ============================================================
-   DOCTOR MODULE
+   DOCTOR PANEL
 ============================================================ */
 const doctorPanel = {
   init() {
-    console.log("Doctor panel loaded");
     this.loadCases();
   },
 
@@ -235,11 +225,23 @@ const doctorPanel = {
       return;
     }
     alert("تم حفظ التشخيص (محاكاة)");
+  },
+
+  issueLeave() {
+    alert("تم إصدار إجازة مرضية للطالب (محاكاة)");
+  },
+
+  prescribeMedication() {
+    alert("تم إضافة وصفة دواء للطالب (محاكاة)");
+  },
+
+  sendReport() {
+    alert("تم إرسال تقرير طبي لولي الأمر (محاكاة)");
   }
 };
 
 /* ============================================================
-   ADMIN MODULE
+   ADMIN PANEL
 ============================================================ */
 const adminPanel = {
   init() {
@@ -248,7 +250,7 @@ const adminPanel = {
 };
 
 /* ============================================================
-   PARENT MODULE
+   PARENT PORTAL
 ============================================================ */
 const parentPortal = {
   init() {
@@ -257,28 +259,38 @@ const parentPortal = {
 };
 
 /* ============================================================
-   STUDENT PROFILE MODULE
+   STUDENT PAGE (Tabs)
 ============================================================ */
-const studentProfile = {
+const studentPage = {
   init() {
-    console.log("Student profile loaded");
-  }
-};
+    this.initTabs();
+  },
 
-/* ============================================================
-   STUDENT SELF-REPORT MODULE
-============================================================ */
-const studentSelfReport = {
-  init() {
-    console.log("Student self-report loaded");
+  initTabs() {
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".tab-panel");
+    if (!tabs.length) return;
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.tab;
+
+        tabs.forEach(t => t.classList.remove("active"));
+        panels.forEach(p => p.classList.remove("active"));
+
+        tab.classList.add("active");
+        const panel = document.querySelector(`.tab-panel[data-tab="${target}"]`);
+        if (panel) panel.classList.add("active");
+      });
+    });
   },
 
   analyzeSymptoms() {
     const symptoms = [...document.querySelectorAll(".symptom input:checked")].map(i => i.value);
-    const temp = parseFloat(document.getElementById("temp").value);
-    const pulse = parseFloat(document.getElementById("pulse").value);
-    const oxygen = parseFloat(document.getElementById("oxygen").value);
-    const bp = document.getElementById("bp").value;
+    const temp = parseFloat(document.getElementById("temp")?.value || 0);
+    const pulse = parseFloat(document.getElementById("pulse")?.value || 0);
+    const oxygen = parseFloat(document.getElementById("oxygen")?.value || 0);
+    const bp = document.getElementById("bp")?.value || "";
 
     let result = "";
     let risk = "normal";
@@ -305,7 +317,7 @@ const studentSelfReport = {
     const box = document.getElementById("ai-result");
     if (box) {
       box.innerHTML = `
-        <div class="glass" style="padding:12px;border-radius:var(--radius-md);">
+        <div class="glass" style="padding:12px;border-radius:var(--radius-md);font-size:0.9rem;">
           <strong>توصية الذكاء الاصطناعي:</strong><br>
           ${result}
         </div>
@@ -319,7 +331,7 @@ const studentSelfReport = {
 };
 
 /* ============================================================
-   CASE DETAILS MODULE
+   CASE DETAILS
 ============================================================ */
 const caseDetails = {
   init() {
@@ -337,7 +349,7 @@ const caseDetails = {
 };
 
 /* ============================================================
-   EMERGENCY FLOW MODULE
+   EMERGENCY FLOW
 ============================================================ */
 const emergencyFlow = {
   init() {
@@ -346,7 +358,7 @@ const emergencyFlow = {
 };
 
 /* ============================================================
-   VIDEO CALL MODULE
+   VIDEO CALL
 ============================================================ */
 const videoCall = {
   init() {
