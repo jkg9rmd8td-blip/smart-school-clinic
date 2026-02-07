@@ -10,42 +10,49 @@
 </head>
 
 <body data-page="video-call">
-  <div class="app-shell fade-in">
+  <div class="app-shell fade-in" style="min-height:100vh;display:flex;flex-direction:column;gap:16px;">
 
-    <header class="app-header glass" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:24px;">
-      <div class="brand" style="display:flex;align-items:center;gap:14px;">
-        <div class="brand-mark" style="
-          width:48px;height:48px;border-radius:14px;
-          background:linear-gradient(135deg,#7b5cff,#a08cff);
-          display:flex;align-items:center;justify-content:center;
-          font-weight:700;font-size:1.1rem;">
-          VC
-        </div>
-        <div class="brand-text">
-          <div class="brand-title" style="font-size:1.2rem;font-weight:600;">زيارة افتراضية</div>
-          <div class="brand-subtitle" style="font-size:0.85rem;color:var(--text-muted);">
-            تواصل مباشر بين الطالب والطبيب
+    <header class="app-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-mark">VC</div>
+        <div>
+          <div style="font-weight:600;">زيارة افتراضية</div>
+          <div class="text-soft" style="font-size:0.8rem;">
+            جلسة صوت وصورة بين الطبيب والطالب وولي الأمر
           </div>
         </div>
       </div>
 
-      <button id="theme-toggle" class="icon-btn">
-        <span class="material-symbols-rounded">brightness_6</span>
-      </button>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="icon-btn" id="theme-toggle">
+          <span class="material-symbols-rounded">brightness_6</span>
+        </button>
+        <button class="icon-btn danger" onclick="back()">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
     </header>
 
-    <main class="video-layout">
+    <main class="video-layout glass card">
 
-      <section class="glass video-main">
+      <div class="video-main">
         <div class="video-box">
-          <span class="video-label">الطبيب</span>
+          <div class="video-label">الطبيب</div>
+          <span class="text-soft">بث فيديو الطبيب (محاكاة)</span>
         </div>
-        <div class="video-box self">
-          <span class="video-label">الطالب</span>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="video-box self">
+            <div class="video-label">الطالب</div>
+            <span class="text-soft">بث فيديو الطالب (محاكاة)</span>
+          </div>
+          <div class="video-box self">
+            <div class="video-label">ولي الأمر</div>
+            <span class="text-soft">بث فيديو ولي الأمر (محاكاة)</span>
+          </div>
         </div>
-      </section>
+      </div>
 
-      <section class="glass video-controls">
+      <div class="video-controls">
         <button class="icon-btn" onclick="videoCall.toggleMic()">
           <span class="material-symbols-rounded">mic</span>
         </button>
@@ -55,14 +62,14 @@
         <button class="icon-btn danger" onclick="videoCall.endCall()">
           <span class="material-symbols-rounded">call_end</span>
         </button>
-      </section>
+      </div>
 
     </main>
 
   </div>
 
   <script src="assets/js/theme.js"></script>
-<script src="assets/js/app.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
+
