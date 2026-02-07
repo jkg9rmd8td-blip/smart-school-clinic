@@ -42,11 +42,11 @@
         </div>
 
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <button class="primary-btn" onclick="go('student.html')">واجهة الطالب</button>
+          <button class="primary-btn" onclick="go('parent.html')">واجهة ولي الأمر</button>
           <button class="primary-btn" onclick="go('nurse-dashboard.html')">لوحة التمريض</button>
           <button class="primary-btn" onclick="go('doctor.html')">لوحة الطبيب</button>
           <button class="primary-btn" onclick="go('admin.html')">لوحة الإدارة</button>
-          <button class="primary-btn" onclick="go('student-self-report.html')">واجهة الطالب</button>
-          <button class="primary-btn" onclick="go('parent.html')">واجهة ولي الأمر</button>
         </div>
 
         <div>
@@ -54,23 +54,23 @@
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;">
             <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>الطالب</strong><br>
-              <span class="text-soft">إدخال الأعراض والفايتلز، توصية AI، زيارة افتراضية.</span>
+              <span class="text-soft">إدخال الأعراض والفايتلز، توصية AI، زيارة افتراضية، سجل صحي.</span>
             </div>
             <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>ولي الأمر</strong><br>
-              <span class="text-soft">متابعة حالة الابن، التنبيهات، طلب خروج، زيارة افتراضية.</span>
+              <span class="text-soft">متابعة حالة الابن، التنبيهات، الإجازات، الأدوية، الزيارات.</span>
             </div>
             <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>التمريض</strong><br>
-              <span class="text-soft">إدارة الحالات اليومية، مسار الطوارئ، الربط مع الطبيب.</span>
+              <span class="text-soft">استقبال الحالات، تقييم أولي، رفع للطبيب، تنفيذ أوامر.</span>
             </div>
             <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>الطبيب</strong><br>
-              <span class="text-soft">تشخيص، متابعة، زيارات افتراضية، دعم بالذكاء الاصطناعي.</span>
+              <span class="text-soft">تشخيص، علاج، أدوية، إجازات، تقارير، زيارات افتراضية.</span>
             </div>
             <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
               <strong>الإدارة</strong><br>
-              <span class="text-soft">لوحة مؤشرات، تقارير، صلاحيات، حوكمة صحية مدرسية.</span>
+              <span class="text-soft">مؤشرات، تقارير، صلاحيات، حوكمة صحية مدرسية.</span>
             </div>
           </div>
         </div>
@@ -80,41 +80,14 @@
         background:radial-gradient(circle at top,#2b2b3f,#050509);
         display:flex;flex-direction:column;gap:12px;
       ">
-        <h2 style="font-size:1rem;">لوحة مؤشرات لحظية</h2>
-
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-          <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
-            <div class="text-soft" style="font-size:0.8rem;">حالات اليوم</div>
-            <div style="font-size:1.5rem;font-weight:700;">24</div>
-          </div>
-          <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
-            <div class="text-soft" style="font-size:0.8rem;">حالات حرجة</div>
-            <div style="font-size:1.5rem;font-weight:700;color:var(--danger);">3</div>
-          </div>
-          <div class="glass" style="padding:10px;border-radius:var(--radius-md);text-align:center;">
-            <div class="text-soft" style="font-size:0.8rem;">زيارات افتراضية</div>
-            <div style="font-size:1.5rem;font-weight:700;">5</div>
-          </div>
-        </div>
-
+        <h2 style="font-size:1rem;">هوية المنصة</h2>
+        <p class="text-soft" style="font-size:0.9rem;">
+          نموذج أولي لمنصة صحية مدرسية ذكية، قابلة للتوسع والربط مع أنظمة الوزارة،
+          مع دعم الذكاء الاصطناعي في تحليل الحالات ودعم القرار.
+        </p>
         <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
-          <strong>مسار الطوارئ</strong><br>
-          <span class="text-soft">
-            تفعيل بروتوكول الطوارئ المدرسي خلال أقل من 3 دقائق من البلاغ.
-          </span>
-          <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
-            <span class="badge badge-critical">تقييم</span>
-            <span class="badge badge-warning">عزل</span>
-            <span class="badge badge-normal">إخطار ولي الأمر</span>
-            <span class="badge badge-normal">تقرير طبي</span>
-          </div>
-        </div>
-
-        <div class="glass" style="padding:10px;border-radius:var(--radius-md);font-size:0.85rem;">
-          <strong>الذكاء الاصطناعي في المنصة</strong><br>
-          <span class="text-soft">
-            تحليل الأعراض والفايتلز، اقتراح مستوى الخطورة، دعم قرار الطبيب، وتغذية لوحة الإدارة بمؤشرات صحية.
-          </span>
+          <strong>النسخة الحالية:</strong><br>
+          واجهات أدوار متكاملة (طالب، ولي أمر، تمريض، طبيب، إدارة) مع تجربة سينمائية داكنة ودعم Light Mode.
         </div>
       </section>
 
